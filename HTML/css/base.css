@@ -1,0 +1,68 @@
+
+@charset "utf-8";
+/*禁用iPhone中Safari的字号自动调整*/
+html{
+	-webkit-text-size-adjust:100%;
+	-ms-text-size-adjust:100%;
+}
+
+/*去除iPhone中默认的input样式*/
+input{-webkit-appearance:none; resize:none;}
+
+/*取消链接高亮*/
+body,div,ul,li,ol,h1,h2,h3,h4,h5,h6,input,textarea,select,select,p,dl,dt,dd,a,img,button,form,table,th,th,tr,th,tbody,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{-webkit-tap-hightlight-color:rgba(0,0,0,0);}
+
+/*设置HTML5元素为块级元素*/
+article,aside,details,figcaption,figure,footer,hgroup,menu,nav,section{display: block;}
+
+/*图片自适应*/
+img{
+	max-width: 100%;
+	height: auto;
+	width:auto\9; /*IE8*/
+	-ms-interpolation-mode:bicubic; /*为了照顾IE图片缩放失真*/
+}
+
+*:focus{outline: none;}
+
+
+/* 清零 */
+body,div,ul,li,ol,h1,h2,h3,h4,h5,h6,input,textarea,select,p,dl,dt,dd,a,img,button,form,table,th,td,tr,tbody,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin: 0;padding: 0;border: none;}
+body{font-family: Tahoma,Arial,"Roboto","Droid Sans","Helvetica Neue","Droid Sans Fallback","STHeiti",sans-serif;}
+em,i{font-style: normal;}
+strong{font-weight: normal;}
+.clearfix:after{content: "";display: block;visibility: hidden;height: 0; clear: both;}
+.clearfix{zoom:1}
+a{text-decoration: none;color: #929292;font-family: Tahoma,Arial,"Roboto","Droid Sans","Helvetica Neue","Droid Sans Fallback","STHeiti",sans-serif;}
+a:hover{color: #929292; text-decoration: none;}
+ul,ol,li{list-style: none;}
+h1,h2,h3,h4,h5,h6{font-size: 100%; font-family: Tahoma,Arial,"Roboto","Droid Sans","Helvetica Neue","Droid Sans Fallback","STHeiti",sans-serif;}
+fieldset,img{border: none;}
+table{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption,th{
+	text-align: left;
+}
+q:before,q:after{content: "";}
+input:password{ime-mode: disabled;}
+.scope{max-width: 640px;margin: 0 auto;}
+.clear{clear: both;}
+/*连续英文，数字换行*/
+.wordwrap{word-break: break-all;word-wrap: break-word;}
+/*单行文字超出显示省略号*/
+.omg{overflow: hidden;text-overflow:ellipsis ;white-space: nowrap;}
+
+*{box-sizing: border-box;}
+
+/* 禁止长按链接与图片弹出菜单 */
+a, img {
+    -webkit-touch-callout: none;
+}
+
+/* 禁止选中文本（如无文本选中需求，此为必选项） */
+html, body {
+    -webkit-user-select: none;
+    user-select: none;
+}

@@ -1,0 +1,124 @@
+@charset "utf-8";
+/* CSS Document */
+.username{	
+	margin-right: 0.2rem;
+}
+.list-group-item-heading{	
+	position: relative;
+}
+.list-group-item-heading>span{	
+	position: relative;
+	font-size: 0.16rem;
+	font-weight: bold;
+	letter-spacing: 4px;
+}
+.chooseAdress {
+    position: absolute;
+    left: 1.5rem;
+    top: -0.07rem;
+}
+.chooseAdress .form-group{	
+	display: inline-block;
+}
+.btn-warning{	
+	margin-left: 0.3rem;
+	position: relative;
+	top: -2px;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{	
+	color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.list-group-item.active  span, .list-group-item.active:focus  span, .list-group-item.active:hover span{	
+	position: relative;
+	z-index:1;
+	cursor: pointer;
+}
+
+.lostList{	
+	overflow: hidden;
+}
+.lostListHead{	
+	margin-right: 5%;
+	width: 20%;
+	height:1.64rem;
+	line-height: 1.64rem;
+	text-align: center;
+	border-right: 1px solid #555;
+}
+.lostListHead>img{	
+	width: 80%;
+	vertical-align: middle;
+}
+.lostListDesc{	
+	width: 45%;
+	line-height: 0.2rem;
+	text-align: left;
+}
+.clickNum{	
+	width: 25%;
+	text-align: right;
+}
+.fabuTitlt{ 	
+	font-size: 0.2rem;
+	font-weight: bold;
+}
+#listHeader{	
+	margin-bottom: 0;
+}
+
+/* 1findOwner_deatil页面 */
+.lostDetail_header{	
+	padding-bottom: 0.15rem;
+}
+.lostDetail_header p{	
+	margin-right: 0.2rem;
+}
+.lostDetail_header .btnState{	
+	position: relative;
+	top: -0.3rem;
+}
+#contactWay{	
+	height: 0.4rem;
+	line-height: 0.4rem;
+	padding-left: 0.2rem;
+}
+#contactWay img{	
+	height: 0.4rem;
+	vertical-align: middle;
+}
+#contactWay .fabuContact{	
+	margin-left: 0.2rem;
+	margin-right: 0.2rem;
+}
+#contactWay .fabuPerson,#contactWay .fabuContact{	
+	font-weight: bold;
+	font-size: 0.18rem;
+	color: #2b2b2b;
+}
+.table caption{	
+	line-height: 0.4rem;
+	font-size: 0.16rem;
+	font-weight: bold;
+	letter-spacing: 4px;
+}
+.table caption img{	
+	height: 0.25rem;
+	vertical-align: middle;
+}
+.lostListBox{	
+    width: 100%;
+	display: block;
+	border: none;
+	background: none;
+}
+.chooseAdress .form-control{	
+	width: auto;
+	display: inline-block
+}
+
+.list-group-item-heading>a{	
+	color: #fff;
+}
