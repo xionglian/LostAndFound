@@ -6,7 +6,6 @@
     <title>基于Java的校园失物信息共享平台</title>
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/1findOwner.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -52,53 +51,55 @@
         <ul class="nav navbar-nav">
             <li><a href="0index.html">首页</a></li>
             <li><a href="1findOwner.html">失物招领</a></li>
-            <li class="active"><a href="2findThings.html">寻物启事</a></li>
+            <li><a href="2findThings.html">寻物启事</a></li>
             <li><a href="3public_findOwner.html">发布失物招领</a></li>
             <li><a href="4public_findThing.html">发布寻物启事</a></li>
-            <li><a href="5thanksLetter.html">感谢信</a></li>
-            <li><a href="6aboutUs.html">关于我们</a></li>
+            <li class="active"><a href="5thanksLetter.html">感谢信</a></li>
+            <li><a href="7aboutUs.html">关于我们</a></li>
         </ul>
     </div>
 </nav>
 <!-- content分区 -->
 <section>
 	<div class="container">
-        <div class="list-group" id="listHeader">
+        <div class="list-group">
             <div class="list-group-item active">
                 <h4 class="list-group-item-heading">
-                    <span>寻物启事信息</span>
-                    <div class="chooseAdress">
-                        <form role="form">
-                            <label for="adress">校区：</label>
-                            <select class="form-control" id="adress">
-                              <option>校本部</option>
-                              <option>白云校区</option>
-                              <option>西校区</option>
-                            </select>
-                            <button class="btn btn-warning" onClick="location.href='4public_findThing.html'">发布寻物启事</button>
-                        </form>
-                    </div>
-                    <ol class="breadcrumb fr">
+                	<a href="5thanksLetter.html">返回</a>
+                   <ol class="fr breadcrumb">
                         <li>您现在的位置：</li>
-                        <li>寻物启事</li>
-                        <li>列表页</li>
+                        <li>感谢信</li>
+                        <li>详情页</li>
                     </ol>
                 </h4>
             </div>
-        </div>
-        <div class="list-group" id="listDeatil"></div>
-        <div id="paging">
-            <div class="first">首页</div>
-            <div class="prev">上一页</div>
-            <ul class="list"></ul>
-            <div class="go">
-              <input type="text" placeholder="Goto">
-              <button>跳转</button>
+            <div class="list-group-item lostList">
+                <h4 class="list-group-item-heading letter_header">
+                    <p class="fabuTitlt">校本部一教106课室拾取到一笔袋</p>
+                    <br>
+                    <div>
+                        <span>
+                            发布时间：&nbsp;<span class="fabuTime">2018-4-12 16:30</span>
+                        </span>&nbsp;&nbsp;
+                        <span>
+                            浏览数：&nbsp;<span class="checkNum">37</span>次
+                        </span>&nbsp;&nbsp;
+                        <span>
+                            来源：&nbsp;失物信息共享平台
+                        </span>
+                    </div>
+                </h4>
+                <hr>
+                <div class="list-group-item-text lostDetail_desc">
+                	<p id="letterContent">
+                    	感谢张同学拾取到我的笔袋，并特意抽时间把笔袋送给我。万分感谢！好人！谢谢谢谢！！！
+                    </p>
+                </div>
+                <p class="shuming"><span>By: &nbsp;</span><span id="luokuan">廖莉同学</span></p>
+                <br>
+                <br>
             </div>
-            <div class="next">下一页</div>
-            <div class="last">末页</div>
         </div>
-        <br>
 	</div>
     <!-- 侧边栏分区 -->
     <div class="side">
@@ -142,9 +143,8 @@
 </footer>
 <!-- js -->
 <script src="js/cookie.js"></script>
-<script src="js/paging.js"></script>
-<script src="js/2findThingdata.js"></script>
-<script src="js/2findThing.js"></script>
+<script src="js/5thankLeterData.js"></script>
+<script src="js/5thankLeter_datail.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({
@@ -155,6 +155,5 @@ $(document).ready(function(e) {
 	})
 });
 </script>
-
 </body>
 </html>

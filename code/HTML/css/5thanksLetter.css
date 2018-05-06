@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+.lostListHead{	
+	line-height: 0;
+}
+.lostListHead>img{	
+	width: 60%;
+}
+.lostListHead>span{	
+	font-weight: normal;
+	top: 0.2rem;
+}

@@ -63,3 +63,17 @@ $.fn.jtime = function (options) {
     }
     return thisV;
 };
+
+
+$(window).scroll(function () { 
+	//console.log($(window).scrollTop());
+	if ($(window).scrollTop() > 100) { 
+		$('.navbar').css({'width':'100%','position':'fixed','top':'0','z-index': 12});
+		$('.lostAndFound_log').css({'position':'fixed','top':'60px'});
+		$('.focusOnzilvhui').css({'position':'fixed','top':'60px'});
+	}else{
+		$('.navbar').css('position','relative');
+		$('.lostAndFound_log').css({'position':'absolute','top':'10px'});
+		$('.focusOnzilvhui').css({'position':'absolute','top':'10px'});
+	}
+});

@@ -23,11 +23,10 @@
             <span class="date"></span>
         </div>
         
-        <form class="form-inline from fr" role="form">
-            <span class="username">海绵宝宝依赖你的微笑</span>
-            <button type="submit" class="btn btn-danger btn-sm">退出</button>
-        </form>
-
+        <div class="from fr">
+            <span class="username"><a href="8userManage.html">海绵宝宝依赖你的微笑</a></span>
+            <button class="btn btn-danger btn-sm" onClick="location.href = '0index.html';">退出</button>
+        </div>
     </div>
 </header>
 <!-- logo分区 -->
@@ -53,10 +52,10 @@
             <li><a href="0index.html">首页</a></li>
             <li class="active"><a href="1findOwner.html">失物招领</a></li>
             <li><a href="2findThings.html">寻物启事</a></li>
-            <li><a href="#">发布失物招领</a></li>
-            <li><a href="#">发布寻物启事</a></li>
-            <li><a href="#">感谢信</a></li>
-            <li><a href="#">关于我们</a></li>
+            <li><a href="3public_findOwner.html">发布失物招领</a></li>
+            <li><a href="4public_findThing.html">发布寻物启事</a></li>
+            <li><a href="5thanksLetter.html">感谢信</a></li>
+            <li><a href="7aboutUs.html">关于我们</a></li>
         </ul>
     </div>
 </nav>
@@ -66,7 +65,8 @@
         <div class="list-group">
             <div class="list-group-item active">
                 <h4 class="list-group-item-heading">
-                       <ol class="breadcrumb">
+                	<a href="1findOwner.html">返回</a>
+                       <ol class="fr breadcrumb">
                             <li>您现在的位置：</li>
                             <li>失物招领</li>
                             <li>详情页</li>
@@ -193,7 +193,9 @@
 </footer>
 <!-- js -->
 <script src="js/cookie.js"></script>
-<script src="js/1findOwnerdata.js"></script>
+<!--<script src="js/jquery.utils.js"></script>
+<script src="js/localstorage.js"></script>
+--><script src="js/1findOwnerdata.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({

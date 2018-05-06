@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/1findOwner.css">
+    <link rel="stylesheet" href="css/01zhuce.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js">
 </script>
@@ -52,53 +52,56 @@
         <ul class="nav navbar-nav">
             <li><a href="0index.html">首页</a></li>
             <li><a href="1findOwner.html">失物招领</a></li>
-            <li class="active"><a href="2findThings.html">寻物启事</a></li>
+            <li><a href="2findThings.html">寻物启事</a></li>
             <li><a href="3public_findOwner.html">发布失物招领</a></li>
             <li><a href="4public_findThing.html">发布寻物启事</a></li>
-            <li><a href="5thanksLetter.html">感谢信</a></li>
-            <li><a href="6aboutUs.html">关于我们</a></li>
+            <li class="active"><a href="5thanksLetter.html">感谢信</a></li>
+            <li><a href="7aboutUs.html">关于我们</a></li>
         </ul>
     </div>
 </nav>
 <!-- content分区 -->
 <section>
 	<div class="container">
-        <div class="list-group" id="listHeader">
+        <div class="list-group">
             <div class="list-group-item active">
                 <h4 class="list-group-item-heading">
-                    <span>寻物启事信息</span>
-                    <div class="chooseAdress">
-                        <form role="form">
-                            <label for="adress">校区：</label>
-                            <select class="form-control" id="adress">
-                              <option>校本部</option>
-                              <option>白云校区</option>
-                              <option>西校区</option>
-                            </select>
-                            <button class="btn btn-warning" onClick="location.href='4public_findThing.html'">发布寻物启事</button>
-                        </form>
-                    </div>
+                    发布感谢信信息
                     <ol class="breadcrumb fr">
                         <li>您现在的位置：</li>
-                        <li>寻物启事</li>
-                        <li>列表页</li>
+                        <li>感谢信</li>
+                        <li>发布感谢信</li>
                     </ol>
                 </h4>
             </div>
-        </div>
-        <div class="list-group" id="listDeatil"></div>
-        <div id="paging">
-            <div class="first">首页</div>
-            <div class="prev">上一页</div>
-            <ul class="list"></ul>
-            <div class="go">
-              <input type="text" placeholder="Goto">
-              <button>跳转</button>
+            <div class="list-group-item animated fadeInUp">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label"><span class="start">*</span>标题</label>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="title" placeholder="请输入您要发布信息的标题">
+                          <span>* &nbsp;标题示范&nbsp;: &nbsp;&nbsp;"身份证已找回，感谢刘同学的帮忙"</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fabuPerson" class="col-sm-2 control-label">发布者</label>
+                        <div class="col-sm-6">
+                          <input type="password" class="form-control" id="fabuPerson" placeholder="海绵宝宝依赖你的微信">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">内容</div>
+                        <div class="col-sm-9">
+                            <textarea name="" id="thanksLetter" class="form-control" cols="30" rows="14" placeholder="请在此处输入您想要表达的感谢内容"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align: center;">
+                          <button type="submit" class="btn btn-success">提交</button>
+                          <button class="btn btn-warning">取消</button>
+                    </div>
+                </form>
             </div>
-            <div class="next">下一页</div>
-            <div class="last">末页</div>
         </div>
-        <br>
 	</div>
     <!-- 侧边栏分区 -->
     <div class="side">
@@ -141,10 +144,6 @@
     </div>
 </footer>
 <!-- js -->
-<script src="js/cookie.js"></script>
-<script src="js/paging.js"></script>
-<script src="js/2findThingdata.js"></script>
-<script src="js/2findThing.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({
@@ -154,7 +153,15 @@ $(document).ready(function(e) {
 		format: "yyyy-MM-dd  星期W"
 	})
 });
-</script>
 
+window.onload = function() {
+		$('#denglu').click(function(e) {
+            
+        });
+		$('#zhuce').click(function(e) {
+            
+        });
+}
+</script>
 </body>
 </html>

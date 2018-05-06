@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/1findOwner.css">
+    <link rel="stylesheet" href="css/7aboutus.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js">
 </script>
@@ -28,6 +28,7 @@
             <span class="username"><a href="8userManage.html">海绵宝宝依赖你的微笑</a></span>
             <button class="btn btn-danger btn-sm" onClick="location.href = '0index.html';">退出</button>
         </div>
+
     </div>
 </header>
 <!-- logo分区 -->
@@ -52,11 +53,11 @@
         <ul class="nav navbar-nav">
             <li><a href="0index.html">首页</a></li>
             <li><a href="1findOwner.html">失物招领</a></li>
-            <li class="active"><a href="2findThings.html">寻物启事</a></li>
+            <li><a href="2findThings.html">寻物启事</a></li>
             <li><a href="3public_findOwner.html">发布失物招领</a></li>
             <li><a href="4public_findThing.html">发布寻物启事</a></li>
             <li><a href="5thanksLetter.html">感谢信</a></li>
-            <li><a href="6aboutUs.html">关于我们</a></li>
+            <li class="active"><a href="7aboutUs.html">关于我们</a></li>
         </ul>
     </div>
 </nav>
@@ -66,39 +67,40 @@
         <div class="list-group" id="listHeader">
             <div class="list-group-item active">
                 <h4 class="list-group-item-heading">
-                    <span>寻物启事信息</span>
-                    <div class="chooseAdress">
-                        <form role="form">
-                            <label for="adress">校区：</label>
-                            <select class="form-control" id="adress">
-                              <option>校本部</option>
-                              <option>白云校区</option>
-                              <option>西校区</option>
-                            </select>
-                            <button class="btn btn-warning" onClick="location.href='4public_findThing.html'">发布寻物启事</button>
-                        </form>
-                    </div>
+                    <span>关于我们</span>
                     <ol class="breadcrumb fr">
                         <li>您现在的位置：</li>
-                        <li>寻物启事</li>
-                        <li>列表页</li>
+                        <li>关于我们</li>
+                        <li>详情页</li>
                     </ol>
                 </h4>
-            </div>
+            </div>        
+            <div class="list-group-item">
+            	<div class="introduce">
+                	<p>校园失物信息共享平台是为了服务同学、减轻广东技术师范学院学生自律委员会失物招领工作的一个平台及工具，我们的目标就是打造一个实用、便捷、高效、有足够知名度和影响力、校园性的服务平台！让遗失物品的主人能有失而复得的惊喜，更为想要帮助他们的好心人提供一个信息平台，为美好校园多建立一个温暖的爱心空间。</p>
+                    <br>
+                     <p>伴随社会科技的飞速发展，人们生活在快节奏的环境里，更离不开诸多的卡、证之类的物品，不慎遗失以后，不但补办麻烦，更会让你寸步难行。</p>
+                     <br>
+                     <p>当看到人们生活必需的各种卡、证之类重要物品遗失以后，需四处奔波寻找的难题，而遗失物品招领处又被大量遗失物品不能及时找到失主在积压所困惑；我们创造条件举办遗失物品认领展示会和开展各种宣传活动，尽最大程度的让遗失物品归还原主,所做的一切,只为看到丢失物品后失而复得灿烂的笑脸,是我们最大的成就!</p>
+                </div>
+                <br>
+                <div>
+                	<p>失物认领网以免费发布信息、为师生提供方便、快捷的服务宗旨。站内设有寻物启事,失物招领、发布失物三大窗口，在子栏目内还设有各个分类信息（钱包、证件卡类、衣物、手机和首饰、车牌、电脑包等），查询、注册方便快捷简单。</p>
+                    <br>
+                    <p>为了让爱心传递项目能够持久、有序的发展，呼吁大家把中华传统美德发扬光大,伸出您好的双手,奉献您的爱心,只要人人都献出一点爱,世界将变得更加美好!同时我们网站与相关的主管单位协调，在适当的机会举办“无人认领物品公开拍卖会”, 拍卖所得将捐赠与贫因山区失学儿童，同时也减轻招领窗口单位的大量遗失物品积压难题。</p>
+                    <br>
+                    <p>你是否对遗失的心爱之物迫切希望它们“回归”... 你是否对拾到的遗失物不能“物归原主”而发愁... 那就请时刻关注服务于师生们的失物信息共享平台吧！关注微信公众号：广师校本部自律会、广师白云自律会、广师西校区自律会，开展你的爱心之旅......</p>
+                    <br><br>
+                </div>
+                <div style="text-align: right;">
+                	<br>
+                    <hr>
+                	<p style=" padding-right:50px; box-sizing: border-box;">校园失物信息共享平台</p>
+                    <br>
+                	<p style=" padding-right:80px; box-sizing: border-box;">2018-05-04</p>
+                </div>
+            </div>        
         </div>
-        <div class="list-group" id="listDeatil"></div>
-        <div id="paging">
-            <div class="first">首页</div>
-            <div class="prev">上一页</div>
-            <ul class="list"></ul>
-            <div class="go">
-              <input type="text" placeholder="Goto">
-              <button>跳转</button>
-            </div>
-            <div class="next">下一页</div>
-            <div class="last">末页</div>
-        </div>
-        <br>
 	</div>
     <!-- 侧边栏分区 -->
     <div class="side">
@@ -140,11 +142,6 @@
         <p>版权最终归网站设计者L&nbsp;L所有</p>
     </div>
 </footer>
-<!-- js -->
-<script src="js/cookie.js"></script>
-<script src="js/paging.js"></script>
-<script src="js/2findThingdata.js"></script>
-<script src="js/2findThing.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({

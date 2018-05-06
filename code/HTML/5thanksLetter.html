@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/1findOwner.css">
+    <link rel="stylesheet" href="css/5thanksLetter.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js">
 </script>
@@ -28,6 +29,7 @@
             <span class="username"><a href="8userManage.html">海绵宝宝依赖你的微笑</a></span>
             <button class="btn btn-danger btn-sm" onClick="location.href = '0index.html';">退出</button>
         </div>
+
     </div>
 </header>
 <!-- logo分区 -->
@@ -52,11 +54,11 @@
         <ul class="nav navbar-nav">
             <li><a href="0index.html">首页</a></li>
             <li><a href="1findOwner.html">失物招领</a></li>
-            <li class="active"><a href="2findThings.html">寻物启事</a></li>
+            <li><a href="2findThings.html">寻物启事</a></li>
             <li><a href="3public_findOwner.html">发布失物招领</a></li>
             <li><a href="4public_findThing.html">发布寻物启事</a></li>
-            <li><a href="5thanksLetter.html">感谢信</a></li>
-            <li><a href="6aboutUs.html">关于我们</a></li>
+            <li class="active"><a href="5thanksLetter.html">感谢信</a></li>
+            <li><a href="7aboutUs.html">关于我们</a></li>
         </ul>
     </div>
 </nav>
@@ -66,7 +68,7 @@
         <div class="list-group" id="listHeader">
             <div class="list-group-item active">
                 <h4 class="list-group-item-heading">
-                    <span>寻物启事信息</span>
+                    <span>感谢信信息</span>
                     <div class="chooseAdress">
                         <form role="form">
                             <label for="adress">校区：</label>
@@ -75,16 +77,17 @@
                               <option>白云校区</option>
                               <option>西校区</option>
                             </select>
-                            <button class="btn btn-warning" onClick="location.href='4public_findThing.html'">发布寻物启事</button>
+                            <button class="btn btn-warning" onClick="location.href='6public_thankLetter.html'">发布感谢信</button>
                         </form>
                     </div>
                     <ol class="breadcrumb fr">
                         <li>您现在的位置：</li>
-                        <li>寻物启事</li>
+                        <li>感谢信</li>
                         <li>列表页</li>
                     </ol>
                 </h4>
-            </div>
+            </div>        
+            
         </div>
         <div class="list-group" id="listDeatil"></div>
         <div id="paging">
@@ -143,8 +146,11 @@
 <!-- js -->
 <script src="js/cookie.js"></script>
 <script src="js/paging.js"></script>
-<script src="js/2findThingdata.js"></script>
-<script src="js/2findThing.js"></script>
+<!--<script src="js/jquery.utils.js"></script>
+<script src="js/localstorage.js"></script>
+-->
+<script src="js/5thankLeterData.js"></script>
+<script src="js/5thankLeter.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({

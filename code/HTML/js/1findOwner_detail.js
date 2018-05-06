@@ -1,4 +1,8 @@
 var num = getCookie('infoFindOwnerNum');
+//var num = qext.LocalStorage.get({
+//	key : "infoFindOwnerNum"
+//});
+//
 //alert(num);
 var info = findOwnerData;
 var state = info[num].state;

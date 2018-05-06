@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<button id="cookie">测试cookie</button>
+<br>
+<br>
+<br>
+<textarea name="" id="text" cols="30" rows="10"></textarea>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/cookie.js"></script>
+<script>
+	$(document).ready(function(e) {
+        //document.cookie = "username = 1111";
+		setCookie('name','LLey',1);
+    });
+	$('#cookie').click(function(e) {
+		alert(111);
+		var name = getCookie('name');
+		$('#text').html(name);
+    });
+</script>
+<body>
+</body>
+</html>

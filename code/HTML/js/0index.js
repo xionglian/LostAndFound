@@ -1,11 +1,14 @@
+var things;
+var books;
 $(function () {
-  findOwnerList();
-  findThingList()
+	books = findOwnerData;
+	things = findThingData;
+	findOwnerList();
+	findThingList();
 });
 
 function findOwnerList(){	
 	var $oResultBox = $('#lostListDeatil');
-	var books = findOwnerData;
 	
 	$oResultBox.html('');
 	for (var i = 0; i < 3; i++) {
@@ -17,9 +20,9 @@ function findOwnerList(){
 		$oResultBox.append(create_div);
 	}
 	for (var j = 0; j < 3; j++) {
-		var num = j;
-		var state = books[num].state;
-		var btns = document.getElementById(num);
+		var num1 = j;
+		var state = books[num1].state;
+		var btns = document.getElementById(num1);
 		//console.log(state);
 		if(state === 1){	
 			btns.innerHTML = "招领成功";
@@ -30,23 +33,21 @@ function findOwnerList(){
 		}
 	}
 }
-
 function findThingList(){
-	var books = findThingData;
 	var $oResultBox = $('#findListDeatil');
 	
 	$oResultBox.html('');
 	for (var i = 3; i < 6; i++) {
 		var num = i - 3;
 		var create_div = $('<button class="lostListBox" onClick="findThing('+ num +');"></button>');
-		var _html = '<div class="list-group-item lostList"><h4 class="list-group-item-heading fl lostListHead"><img src="'+ books[num].imgUrl +'" alt=""></h4><div class="list-group-item-text fl lostListDesc"><h2 class="fabuTitlt">'+ books[num].fabuTitlt +'</h2><br><span>失物类型：&nbsp;</span><span>寻物启事</span><br><span>发布者：&nbsp;</span><span class="fabuPerson">'+ books[num].fabuPerson +'</span><br><span>发布者身份：&nbsp;</span><span class="fabuType">'+ books[num].fabuType +'</span><br><span>发布时间：&nbsp;</span><span class="fabuTime">'+ books[num].fabuTime +'</span><br><span>发布地点：&nbsp;</span><span class="fabuLocation">'+ books[num].fabuLocation +'</span></div><div class="list-group-item-text fl clickNum"><p><span class="time">'+ books[num].dateTime +'</span>&nbsp;&nbsp;查阅数： <span class="checkNum">'+ books[num].checkNum +'</span></p><br><br><p><button id="'+ i +'" disabled="true"></button></p><br><br><p>了解详情 &nbsp;&nbsp;&gt;&gt;</p></div></div>';
+		var _html = '<div class="list-group-item lostList"><h4 class="list-group-item-heading fl lostListHead"><img src="'+ things[num].imgUrl +'" alt=""></h4><div class="list-group-item-text fl lostListDesc"><h2 class="fabuTitlt">'+ things[num].fabuTitlt +'</h2><br><span>失物类型：&nbsp;</span><span>寻物启事</span><br><span>发布者：&nbsp;</span><span class="fabuPerson">'+ things[num].fabuPerson +'</span><br><span>发布者身份：&nbsp;</span><span class="fabuType">'+ things[num].fabuType +'</span><br><span>发布时间：&nbsp;</span><span class="fabuTime">'+ things[num].fabuTime +'</span><br><span>发布地点：&nbsp;</span><span class="fabuLocation">'+ things[num].fabuLocation +'</span></div><div class="list-group-item-text fl clickNum"><p><span class="time">'+ things[num].dateTime +'</span>&nbsp;&nbsp;查阅数： <span class="checkNum">'+ things[num].checkNum +'</span></p><br><br><p><button id="'+ i +'" disabled="true"></button></p><br><br><p>了解详情 &nbsp;&nbsp;&gt;&gt;</p></div></div>';
 		
 		create_div.html(_html).addClass('animated fadeIn');
 		$oResultBox.append(create_div);
 	}
 	for (var j = 3; j < 6; j++) {
-		var num = j - 5;
-		var btnstate = books[num].state;
+		var num1 = j - 3;
+		var btnstate = things[num1].state;
 		var obtns = document.getElementById(j);
 		//console.log(state);
 		if(btnstate === 1){	
