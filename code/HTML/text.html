@@ -4,22 +4,39 @@
 <meta charset="utf-8">
 <title>无标题文档</title>
 </head>
-<button id="cookie">测试cookie</button>
+<form action="" method="post">
+    <label>用户名：<input type="text" id="username"></label>
+    <br>
+    <label>角色：
+        <br><input type="radio" name="role" value="0">普通用户  <input type="radio" name="role" value="1">管理员</label>
+    <br><br>
+    <button type="submit" id="send">测试ajax调用后台接口</button>
+</form>
 <br>
-<br>
-<br>
-<textarea name="" id="text" cols="30" rows="10"></textarea>
+<textarea name="" id="resText" cols="30" rows="10">测试测试测试！！！</textarea>
+
 <script src="js/jquery-1.11.0.min.js"></script>
 <script src="js/cookie.js"></script>
 <script>
-	$(document).ready(function(e) {
-        //document.cookie = "username = 1111";
-		setCookie('name','LLey',1);
-    });
-	$('#cookie').click(function(e) {
-		alert(111);
-		var name = getCookie('name');
-		$('#text').html(name);
+    $(function(){
+        $('#send').click(function(){
+            var userName = $("#username").val();
+            var role = $('input:radio[name="role"]:checked').val();
+            $.ajax({
+                type: "GET",
+                url: "119.29.102.236/user/isRegistered",
+                data: {username:userName, role:role},
+                dataType: "json",
+                success: function(data){
+                    $('#resText').empty();
+                    $('#resText').html('测试成功！！');
+                },
+                error: function(result){
+                    $('#resText').empty();
+                    $('#resText').html('测试失败！！')
+                }
+            });
+        });
     });
 </script>
 <body>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        ul li{
+            line-height: 40px;
+        }
+        .tips{
+            margin-top: 30px;
+        }
+        .tips>p{
+            width: 300px;
+            background: red;
+            text-align: center;
+            line-height: 40px;
+            color:#fff;
+            display: none;
+        }
+        #verity,#submit{
+            width: 120px;
+            line-height: 40px;
+            background: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        input{
+            outline: none;
+        }
+        input.disabled{
+            background: #ccc !important;
+        }
+    </style>
+</head>
+<body>
+<div class="register">
+    <ul>
+        <li>
+            <label for="username">用户名：</label>
+            <input type="text" id="username" />
+        </li>
+        <li>
+            <label for="pass">密码：</label>
+            <input type="password" id="pass"/>
+        </li>
+        <li>
+            <label for="repass">确认密码：</label>
+            <input type="password" id="repass"/>
+        </li>
+        <li>
+            <label for="mobile">手机号：</label>
+            <input type="text" id="mobile"/>
+        </li>
+        <li>
+            <label for="code">验证码：</label>
+            <input type="text" id="code"/>
+            <input type="button" value="获取验证码" id="verity"/>
+        </li>
+        <li>
+            <input type="button" value="立即注册" id="submit"/>
+        </li>
+    </ul>
+</div>
+<div class="tips">
+    <p>请输入手机号</p>
+</div>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script>
+    $(function(){
+        var $tips=$('.tips>p');
+        $('body').on('click','#verity',function(){
+            var $mobile=$('#mobile').val();
+            var $verity=$('#verity');
+
+
+            $.ajax({
+//                    请求方式
+                type:'post',
+//                    后台接口地址（可从接口文档中查看）
+                url:'registerCode.php',
+//                    通过data把前端传输后台的必要信息传过去
+                data:{mobile:$mobile},
+//                    前后端数据交互的格式
+                dataType:'json',
+//                    发送请求之前，所要执行的函数
+                beforeSend:function(){
+//                        如果手机号为空，弹出提示信息
+                    if($mobile==''){
+                        $tips.html('请输入手机号').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+//                        手机号为11位，以1开头，第二位为3,5,7,8，后9位都是数字
+                    if(!/^1[3,5,7,8]\d{9}$/.test($mobile)){
+                        $tips.html('请输入正确的手机号').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+//                        判断$verity是否有disabled属性，如果有结束执行，相当于禁用按钮
+                    if($verity.hasClass('disabled')){
+                        return false;
+                    }
+//                        手机号没有问题，改变$verity颜色，并且修改内部文字
+                    $verity.val('正在发送').addClass('disabled');
+                },
+//                    发送请求成功，所要执行的函数
+                success:function(data){
+                    //容错性，如果后台代码有问题，依然可以执行
+                    //短路运算：声明的变量的值等于在短路运算中起决定性作用的值
+                    // 定义：短路运算的值是起决定性作用的那个变量的值
+                    //              var a=XXX&&YYY
+//                                  var b=XXX||YYY
+//                    短路运算看的是boolean值
+                    //' '  true  '' false
+                    //接受后台返回来的额数据
+                    var time=data.result.time||10;
+                    time=parseInt(time);      //把time转换为整数
+                    var timer=setInterval(function(){
+                        if(time==0){
+                            $verity.val('获取验证码').removeClass('disabled');
+                            //当一个计时器之后不会再次使用的时候，直接清除
+                            clearInterval(timer);
+                            return false;
+                        }
+                        time--;
+                        $verity.val(time+'秒后再次发送').addClass('disabled');
+                    },1000);
+                }
+            })
+        });
+        $('body').on('click','#submit',function(){
+            var $name=$('#username').val();
+            var $pass=$('#pass').val();
+            var $repass=$('#repass').val();
+            var $mobile=$('#mobile').val();
+            var $code=$('#code').val();
+            var $submit=$('#submit');
+            $.ajax({
+                type:'post',
+                url:'register.php',
+                data:{
+                    name:$name,
+                    pass:$pass,
+                    repass:$repass,
+                    code:$code,
+                    mobile:$mobile
+                },
+                dataType:'json',
+                beforeSend:function(){
+//                        判断用户名是否为空
+                    if(!$name){
+                        $tips.html('请输入用户名').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+//                        判断密码是否为空
+                    if(!$pass){
+                        $tips.html('请输入密码').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+//                        判断密码输入的长度是否为6~15之间
+                    if($pass.length<6||$pass.length>15){
+                        $tips.html('请输入6~15位密码').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+//                        判断确认密码是否为空
+                    if(!$repass){
+                        $tips.html('请输入确认密码').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+//                        判断密码和确认密码是否一致
+                    if($pass!=$repass){
+                        $tips.html('确认密码和密码不一致').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+                    //需要验证指定手机号与对应验证码是否匹配，因为无确切后台文件，所以无法匹配
+//                        判断验证码是否为空
+                    if(!$code){
+                        $tips.html('请输入验证码').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+//                        判断验证码是否为4个数字
+                    if(!/^\d{4}$/){
+                        $tips.html('请正确的验证码').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+//                        判断$submit按钮是否有disabled属性，如果没有添加属性，如果有结束执行
+                    if($submit.hasClass('disabled')){
+                        return false;
+                    }
+                    $submit.val('正在注册').addClass('disabled');
+                },
+                success:function(){
+//                        code 当前业务逻辑的处理成功失败的标识  10000 成功  10001 用户存在 10002 没有输入用户名
+                    if(data.code==10000){
+                        $tips.html('注册成功').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }else if(data.code==10001){
+                        $tips.html('用户名重复').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }else if(data.code==10001){
+                        $tips.html('请输入用户名').fadeIn(500).delay(1500).fadeOut(500);
+                        return false;
+                    }
+                },
+                //当整个请求和响应的过程都执行完毕的时候执行的函数
+                complete:function(){
+                    $submit.val('立即注册').removeClass('disabled');
+                    return false;
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

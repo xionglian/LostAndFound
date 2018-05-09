@@ -75,11 +75,17 @@
                 </h4>
             </div>
             <div class="list-group-item">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" method="post">
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-1 control-label">用户名</label>
+                        <label for="loginname" class="col-sm-1 control-label">登录名</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="firstname" placeholder="请输入您的昵称">
+                            <input type="text" class="form-control" id="loginname" placeholder="请输入您的登录用户名，必须由字母组成">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-1 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="username" placeholder="请输入您的中文账号名">
                         </div>
                     </div>
                     <div class="form-group">
@@ -91,7 +97,26 @@
                     <div class="form-group">
                         <label for="repassword" class="col-sm-1 control-label">确认密码</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" id="repassword" placeholder="请再次输入您的密码">
+                            <input type="password" class="form-control" id="repassword" placeholder="请再次输入您的密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userImg" class="col-sm-1 control-label">用户头像</label>
+                        <div class="col-sm-10">
+                            <input type="file" id="userImg">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">用户身份</label>
+                        <div class="col-sm-10">
+                            <div class="radio">
+                                <label for="normalUser">
+                                    <input type="radio" name="role" id="normalUser" value="0" checked> 普通用户
+                                </label>
+                                <label for="manager">
+                                    <input type="radio" name="role" id="manager"  value="10"> 管理员
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -99,12 +124,22 @@
                         <div class="col-sm-10">
                             <div class="radio">
                                 <label for="male">
-                                    <input type="radio" name="male" id="male" value="male" checked> 男
-                                </label> 
+                                    <input type="radio" name="male" id="male" value="0" checked> 男
+                                </label>
                                 <label for="female">
-                                    <input type="radio" name="female" id="female"  value="female"> 女
-                                </label> 
-                            </div>         
+                                    <input type="radio" name="male" id="female"  value="0"> 女
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="schoolLocation" class="col-sm-1 control-label">校区</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="schoolLocation">
+                                <option value="校本部">校本部</option>
+                                <option value="白云校区">白云校区</option>
+                                <option value="西校区">西校区</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -112,25 +147,31 @@
                         <div class="col-sm-10">
                             <select class="form-control" id="erjixueyuan"></select>
                         </div>
-                    </div>                  
+                    </div>
                     <div class="form-group">
                         <label for="classes" class="col-sm-1 control-label">班级</label>
                         <div class="col-sm-10">
                         	<input type="text" class="form-control" id="classes" placeholder="请输入您的班级" >
                         </div>
-                    </div>                  
+                    </div>
                     <div class="form-group">
                         <label for="contact" class="col-sm-1 control-label">联系方式</label>
                         <div class="col-sm-10">
-                        	<input type="text" class="form-control" id="contact" placeholder="请输入您的联系方式" >
+                            <input type="text" class="form-control" id="contact" placeholder="请输入您的联系方式" >
                         </div>
-                    </div>                  
+                    </div>
+                    <div class="form-group">
+                        <label for="qq" class="col-sm-1 control-label">QQ</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="qq" placeholder="请输入您的QQ" >
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="email" class="col-sm-1 control-label">E-mail</label>
                         <div class="col-sm-10">
-                        	<input type="text" class="form-control" id="email" placeholder="请输入您的邮箱" >
+                            <input type="text" class="form-control" id="email" placeholder="请输入您的邮箱" >
                         </div>
-                    </div>                  
+                    </div>
                     <div class="form-group">
                         <label for="useServer" class="col-sm-1 control-label">用户协议</label>
                         <div class="col-sm-10">
@@ -144,17 +185,20 @@
                     <div class="form-group">
                         <div class="col-sm-offset-1 col-sm-10">
                             <label>
-                              <input type="checkbox">&nbsp;&nbsp;我已经阅读并完全同意服务协议
+                              <input type="checkbox" id="server">&nbsp;&nbsp;我已经阅读并完全同意服务协议
                             </label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-1 col-sm-10">
-                          <button type="submit" class="btn btn-success">提交</button>
-                          <button type="submit" class="btn btn-warning">取消</button>
-                        </div>
-                    </div>
                 </form>
+                <button id="submit" class="btn btn-success" style="margin-left: 120px; margin-right: 100px;" onclick="submit();">提交</button>
+                <button class="btn btn-warning">取消</button>
+                <!--<div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <button id="submit" class="btn btn-success">提交</button>
+                        <button class="btn btn-warning">取消</button>
+                    </div>
+                </div>-->
+
             </div>
         </div>
 	</div>
@@ -210,13 +254,102 @@ $(document).ready(function(e) {
 	})
 });
 
-window.onload = function() {
-		$('#denglu').click(function(e) {
-            
-        });
-		$('#zhuce').click(function(e) {
-            
-        });
+</script>
+<script>
+function submit(){
+    alert('提交');
+    var $loginname = $('#loginname').val();
+    var $username = $('#username').val();
+    var $psw = $('#password').val();
+    var $repsw = $('#repassword').val();
+    var $userImg = $('#userImg').val();
+    var $role = $('input:radio[name="role"]:checked').val();
+    var $sex = $('input:radio[name="male"]:checked').val();
+    var $schoolLocation = $('#schoolLocation').val();
+    var $secondSchool = $('#erjixueyuan').val();
+    var $class = $('#classes').val();
+    var $contactWay = $('#contact').val();
+    var $qq = $('#qq').val();
+    var $eMail = $('#email').val();
+    var $server = $('#server');
+    var $submit = $('#submit');
+    alert($loginname+$username+$psw+$repsw+$userImg+$role+$sex+$schoolLocation+$secondSchool+$class+$contactWay)
+    $.ajax({
+        type:'post',
+        url:'http://119.29.102.236/user/register',
+        data:{
+            "loginName":$loginname,
+            "username":$username,
+            "password":$psw,
+            "role":$role,
+            "sex":$sex,
+            "schoolLocation":$schoolLocation,
+            "secondSchool":$secondSchool,
+            "userClass":$class,
+            "tel":$contactWay,
+            "qq":$qq,
+            "mail":$eMail,
+            "userImg":$userImg
+        },
+        dataType:'json',
+        beforeSend:function(){
+//                        判断用户名是否为空
+            if(!$loginname){
+                //$('#loginname').attr('placeholder','登录用户名不能为空，且必须由字母组成，请输入您的登录用户名').fadeIn(500).delay(1500).fadeOut(500);
+                alert('登录用户名不能为空，且必须由字母组成，请输入您的登录用户名');
+                return false;
+            }
+            if(!$username){
+                //$('#username').attr('placeholder','用户名不能为空，请输入您的用户名').fadeIn(500).delay(1500).fadeOut(500);
+                alert('用户名不能为空，请输入您的用户名');
+                return false;
+            }
+//                        判断密码是否为空
+            if(!$psw){
+                $('#password').attr('placeholder','密码不能为空，请输入您的密码').fadeIn(500).delay(1500).fadeOut(500);
+                alert('密码不能为空，请输入您的密码');
+                return false;
+            }
+//                        判断两次密码是否一致
+            if($psw != $repsw){
+                // $('#password').attr('placeholder','输入的密码不一致，请输入正确的密码').fadeIn(500).delay(1500).fadeOut(500);
+                alert('输入的密码不一致，请输入正确的密码');
+                $psw == '';
+                $repsw == '';
+                return false;
+            }
+//                        判断确认密码是否为空
+            if(!$repsw){
+                alert('确认密码不能为空，请输入您的确认密码');
+                return false;
+            }
+//                        判断$submit按钮是否有disabled属性，如果没有添加属性，如果有结束执行
+            if($submit.hasClass('disabled')){
+                return false;
+            }
+            $submit.val('正在注册').addClass('disabled');
+        },
+        success:function(){
+            alert('注册成功，请登录');
+            location.href = '02denglu.html';
+        },
+        error:function(){
+            alert('注册失败');
+        }
+    })
+    //成功后的处理函数,res为服务器返回的数据
+    .done(function(res) {
+        alert("success");
+    })
+    //失败后的处理函数
+    .fail(function(res) {
+        alert("error");
+        //console.log(res);
+    })
+    //结束后的处理函数，不管成功失败都执行
+    .always(function(res) {
+        alert("complete");
+    });
 }
 </script>
 </body>
