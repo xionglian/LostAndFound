@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xionglian.mapper.FoundMapper">
+  <resultMap id="BaseResultMap" type="com.xionglian.model.Found">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="release_user_id" jdbcType="INTEGER" property="releaseUserId" />
+    <result column="confirm_found_user_id" jdbcType="INTEGER" property="confirmFoundUserId" />
+    <result column="link_name" jdbcType="VARCHAR" property="linkName" />
+    <result column="link_phone" jdbcType="VARCHAR" property="linkPhone" />
+    <result column="good_type" jdbcType="VARCHAR" property="goodType" />
+    <result column="good_name" jdbcType="VARCHAR" property="goodName" />
+    <result column="found_address" jdbcType="VARCHAR" property="foundAddress" />
+    <result column="found_address_detail" jdbcType="VARCHAR" property="foundAddressDetail" />
+    <result column="found_time" jdbcType="TIMESTAMP" property="foundTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="description_detail" jdbcType="VARCHAR" property="descriptionDetail" />
+    <result column="key_word01" jdbcType="VARCHAR" property="keyWord01" />
+    <result column="key_word02" jdbcType="VARCHAR" property="keyWord02" />
+    <result column="key_word03" jdbcType="VARCHAR" property="keyWord03" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+    <result column="picture_url" jdbcType="VARCHAR" property="pictureUrl" />
+    <result column="click_num" jdbcType="INTEGER" property="clickNum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, release_user_id, confirm_found_user_id, link_name, link_phone, good_type, 
+    good_name, found_address, found_address_detail, found_time, create_time, description_detail, 
+    key_word01, key_word02, key_word03, state, confirm_time, picture_url, click_num
+  </sql>
+  <select id="selectByExample" parameterType="com.xionglian.model.FoundExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from found
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from found
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from found
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xionglian.model.FoundExample">
+    delete from found
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xionglian.model.Found">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into found (title, release_user_id, confirm_found_user_id, 
+      link_name, link_phone, good_type, 
+      good_name, found_address, found_address_detail, 
+      found_time, create_time, description_detail, 
+      key_word01, key_word02, key_word03, 
+      state, confirm_time, picture_url, 
+      click_num)
+    values (#{title,jdbcType=VARCHAR}, #{releaseUserId,jdbcType=INTEGER}, #{confirmFoundUserId,jdbcType=INTEGER}, 
+      #{linkName,jdbcType=VARCHAR}, #{linkPhone,jdbcType=VARCHAR}, #{goodType,jdbcType=VARCHAR}, 
+      #{goodName,jdbcType=VARCHAR}, #{foundAddress,jdbcType=VARCHAR}, #{foundAddressDetail,jdbcType=VARCHAR}, 
+      #{foundTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{descriptionDetail,jdbcType=VARCHAR}, 
+      #{keyWord01,jdbcType=VARCHAR}, #{keyWord02,jdbcType=VARCHAR}, #{keyWord03,jdbcType=VARCHAR}, 
+      #{state,jdbcType=TINYINT}, #{confirmTime,jdbcType=TIMESTAMP}, #{pictureUrl,jdbcType=VARCHAR}, 
+      #{clickNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xionglian.model.Found">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into found
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="releaseUserId != null">
+        release_user_id,
+      </if>
+      <if test="confirmFoundUserId != null">
+        confirm_found_user_id,
+      </if>
+      <if test="linkName != null">
+        link_name,
+      </if>
+      <if test="linkPhone != null">
+        link_phone,
+      </if>
+      <if test="goodType != null">
+        good_type,
+      </if>
+      <if test="goodName != null">
+        good_name,
+      </if>
+      <if test="foundAddress != null">
+        found_address,
+      </if>
+      <if test="foundAddressDetail != null">
+        found_address_detail,
+      </if>
+      <if test="foundTime != null">
+        found_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="descriptionDetail != null">
+        description_detail,
+      </if>
+      <if test="keyWord01 != null">
+        key_word01,
+      </if>
+      <if test="keyWord02 != null">
+        key_word02,
+      </if>
+      <if test="keyWord03 != null">
+        key_word03,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="confirmTime != null">
+        confirm_time,
+      </if>
+      <if test="pictureUrl != null">
+        picture_url,
+      </if>
+      <if test="clickNum != null">
+        click_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseUserId != null">
+        #{releaseUserId,jdbcType=INTEGER},
+      </if>
+      <if test="confirmFoundUserId != null">
+        #{confirmFoundUserId,jdbcType=INTEGER},
+      </if>
+      <if test="linkName != null">
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null">
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="goodType != null">
+        #{goodType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodName != null">
+        #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="foundAddress != null">
+        #{foundAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="foundAddressDetail != null">
+        #{foundAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="foundTime != null">
+        #{foundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="descriptionDetail != null">
+        #{descriptionDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord01 != null">
+        #{keyWord01,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord02 != null">
+        #{keyWord02,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord03 != null">
+        #{keyWord03,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="confirmTime != null">
+        #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureUrl != null">
+        #{pictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNum != null">
+        #{clickNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xionglian.model.FoundExample" resultType="java.lang.Long">
+    select count(*) from found
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update found
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releaseUserId != null">
+        release_user_id = #{record.releaseUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.confirmFoundUserId != null">
+        confirm_found_user_id = #{record.confirmFoundUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.linkName != null">
+        link_name = #{record.linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkPhone != null">
+        link_phone = #{record.linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodType != null">
+        good_type = #{record.goodType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodName != null">
+        good_name = #{record.goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foundAddress != null">
+        found_address = #{record.foundAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foundAddressDetail != null">
+        found_address_detail = #{record.foundAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foundTime != null">
+        found_time = #{record.foundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.descriptionDetail != null">
+        description_detail = #{record.descriptionDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyWord01 != null">
+        key_word01 = #{record.keyWord01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyWord02 != null">
+        key_word02 = #{record.keyWord02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyWord03 != null">
+        key_word03 = #{record.keyWord03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.confirmTime != null">
+        confirm_time = #{record.confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pictureUrl != null">
+        picture_url = #{record.pictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clickNum != null">
+        click_num = #{record.clickNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update found
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      release_user_id = #{record.releaseUserId,jdbcType=INTEGER},
+      confirm_found_user_id = #{record.confirmFoundUserId,jdbcType=INTEGER},
+      link_name = #{record.linkName,jdbcType=VARCHAR},
+      link_phone = #{record.linkPhone,jdbcType=VARCHAR},
+      good_type = #{record.goodType,jdbcType=VARCHAR},
+      good_name = #{record.goodName,jdbcType=VARCHAR},
+      found_address = #{record.foundAddress,jdbcType=VARCHAR},
+      found_address_detail = #{record.foundAddressDetail,jdbcType=VARCHAR},
+      found_time = #{record.foundTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      description_detail = #{record.descriptionDetail,jdbcType=VARCHAR},
+      key_word01 = #{record.keyWord01,jdbcType=VARCHAR},
+      key_word02 = #{record.keyWord02,jdbcType=VARCHAR},
+      key_word03 = #{record.keyWord03,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=TINYINT},
+      confirm_time = #{record.confirmTime,jdbcType=TIMESTAMP},
+      picture_url = #{record.pictureUrl,jdbcType=VARCHAR},
+      click_num = #{record.clickNum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xionglian.model.Found">
+    update found
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseUserId != null">
+        release_user_id = #{releaseUserId,jdbcType=INTEGER},
+      </if>
+      <if test="confirmFoundUserId != null">
+        confirm_found_user_id = #{confirmFoundUserId,jdbcType=INTEGER},
+      </if>
+      <if test="linkName != null">
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null">
+        link_phone = #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="goodType != null">
+        good_type = #{goodType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodName != null">
+        good_name = #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="foundAddress != null">
+        found_address = #{foundAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="foundAddressDetail != null">
+        found_address_detail = #{foundAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="foundTime != null">
+        found_time = #{foundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="descriptionDetail != null">
+        description_detail = #{descriptionDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord01 != null">
+        key_word01 = #{keyWord01,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord02 != null">
+        key_word02 = #{keyWord02,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord03 != null">
+        key_word03 = #{keyWord03,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="confirmTime != null">
+        confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureUrl != null">
+        picture_url = #{pictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNum != null">
+        click_num = #{clickNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xionglian.model.Found">
+    update found
+    set title = #{title,jdbcType=VARCHAR},
+      release_user_id = #{releaseUserId,jdbcType=INTEGER},
+      confirm_found_user_id = #{confirmFoundUserId,jdbcType=INTEGER},
+      link_name = #{linkName,jdbcType=VARCHAR},
+      link_phone = #{linkPhone,jdbcType=VARCHAR},
+      good_type = #{goodType,jdbcType=VARCHAR},
+      good_name = #{goodName,jdbcType=VARCHAR},
+      found_address = #{foundAddress,jdbcType=VARCHAR},
+      found_address_detail = #{foundAddressDetail,jdbcType=VARCHAR},
+      found_time = #{foundTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      description_detail = #{descriptionDetail,jdbcType=VARCHAR},
+      key_word01 = #{keyWord01,jdbcType=VARCHAR},
+      key_word02 = #{keyWord02,jdbcType=VARCHAR},
+      key_word03 = #{keyWord03,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      picture_url = #{pictureUrl,jdbcType=VARCHAR},
+      click_num = #{clickNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

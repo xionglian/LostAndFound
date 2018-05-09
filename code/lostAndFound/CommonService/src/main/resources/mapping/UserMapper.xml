@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xionglian.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.xionglian.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+    <result column="role" jdbcType="TINYINT" property="role" />
+    <result column="school_location" jdbcType="VARCHAR" property="schoolLocation" />
+    <result column="second_school" jdbcType="VARCHAR" property="secondSchool" />
+    <result column="user_class" jdbcType="VARCHAR" property="userClass" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_login" jdbcType="BIT" property="isLogin" />
+    <result column="put_lost_num" jdbcType="INTEGER" property="putLostNum" />
+    <result column="put_found_num" jdbcType="INTEGER" property="putFoundNum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, login_name, username, password, tel, mail, sex, user_img, role, school_location, 
+    second_school, user_class, create_time, is_login, put_lost_num, put_found_num
+  </sql>
+  <select id="selectByExample" parameterType="com.xionglian.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xionglian.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xionglian.model.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (login_name, username, password, 
+      tel, mail, sex, user_img, 
+      role, school_location, second_school, 
+      user_class, create_time, is_login, 
+      put_lost_num, put_found_num)
+    values (#{loginName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{userImg,jdbcType=VARCHAR}, 
+      #{role,jdbcType=TINYINT}, #{schoolLocation,jdbcType=VARCHAR}, #{secondSchool,jdbcType=VARCHAR}, 
+      #{userClass,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{isLogin,jdbcType=BIT}, 
+      #{putLostNum,jdbcType=INTEGER}, #{putFoundNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xionglian.model.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="userImg != null">
+        user_img,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="schoolLocation != null">
+        school_location,
+      </if>
+      <if test="secondSchool != null">
+        second_school,
+      </if>
+      <if test="userClass != null">
+        user_class,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isLogin != null">
+        is_login,
+      </if>
+      <if test="putLostNum != null">
+        put_lost_num,
+      </if>
+      <if test="putFoundNum != null">
+        put_found_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="userImg != null">
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=TINYINT},
+      </if>
+      <if test="schoolLocation != null">
+        #{schoolLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="secondSchool != null">
+        #{secondSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="userClass != null">
+        #{userClass,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isLogin != null">
+        #{isLogin,jdbcType=BIT},
+      </if>
+      <if test="putLostNum != null">
+        #{putLostNum,jdbcType=INTEGER},
+      </if>
+      <if test="putFoundNum != null">
+        #{putFoundNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xionglian.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginName != null">
+        login_name = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mail != null">
+        mail = #{record.mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.userImg != null">
+        user_img = #{record.userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null">
+        role = #{record.role,jdbcType=TINYINT},
+      </if>
+      <if test="record.schoolLocation != null">
+        school_location = #{record.schoolLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondSchool != null">
+        second_school = #{record.secondSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userClass != null">
+        user_class = #{record.userClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isLogin != null">
+        is_login = #{record.isLogin,jdbcType=BIT},
+      </if>
+      <if test="record.putLostNum != null">
+        put_lost_num = #{record.putLostNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.putFoundNum != null">
+        put_found_num = #{record.putFoundNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      login_name = #{record.loginName,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      mail = #{record.mail,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=TINYINT},
+      user_img = #{record.userImg,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=TINYINT},
+      school_location = #{record.schoolLocation,jdbcType=VARCHAR},
+      second_school = #{record.secondSchool,jdbcType=VARCHAR},
+      user_class = #{record.userClass,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      is_login = #{record.isLogin,jdbcType=BIT},
+      put_lost_num = #{record.putLostNum,jdbcType=INTEGER},
+      put_found_num = #{record.putFoundNum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xionglian.model.User">
+    update user
+    <set>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="userImg != null">
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=TINYINT},
+      </if>
+      <if test="schoolLocation != null">
+        school_location = #{schoolLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="secondSchool != null">
+        second_school = #{secondSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="userClass != null">
+        user_class = #{userClass,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isLogin != null">
+        is_login = #{isLogin,jdbcType=BIT},
+      </if>
+      <if test="putLostNum != null">
+        put_lost_num = #{putLostNum,jdbcType=INTEGER},
+      </if>
+      <if test="putFoundNum != null">
+        put_found_num = #{putFoundNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xionglian.model.User">
+    update user
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      user_img = #{userImg,jdbcType=VARCHAR},
+      role = #{role,jdbcType=TINYINT},
+      school_location = #{schoolLocation,jdbcType=VARCHAR},
+      second_school = #{secondSchool,jdbcType=VARCHAR},
+      user_class = #{userClass,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_login = #{isLogin,jdbcType=BIT},
+      put_lost_num = #{putLostNum,jdbcType=INTEGER},
+      put_found_num = #{putFoundNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

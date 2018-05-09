@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <conversionRule conversionWord="logId" converterClass="com.xionglian.common.util.LogIdUtil"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35}  [%logId] -%msg %n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="fixedFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/logs/TeaHouse.log</file>
+        <!-- 根据固定窗口模式生成日志文件，结合triggeringPolicy（当日志文件达到5MB时触发滚动，生成新的日志文件） -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- 日志文件命名，%i代表从minIndex到maxIndex，即 TeaHouse1.log.zip TeaHouse2.log.zip
+                TeaHouse3.log.zip -->
+            <!-- 当生成了30个归档文件后，若继续生成，将覆盖最早的日志 -->
+            <fileNamePattern>/logs/TeaHouse%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>30</maxIndex>
+        </rollingPolicy>
+        <!-- 触发策略，达到一定条件时将通知appender，触发滚动 -->
+        <triggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>100MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd-HH:mm:ss.SSS} %level   [%thread]-%class:%line>>%msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <logger name="com.xionglian.dao" additivity="false" level="debug">
+        <appender-ref ref="fixedFile" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"></appender-ref>
+        <appender-ref ref="fixedFile" ></appender-ref>
+    </root>
+</configuration>

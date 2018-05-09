@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="DB2Tables"  targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://master.yuxingyue.cn:3306/lostandfound?useUnicode=true" userId="root" password="123456">
+        </jdbcConnection>
+
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.xionglian.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xionglian.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名
+        <table tableName="t_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        -->
+
+        <!-- <table tableName="%">
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table> -->
+
+        <!-- generatedKey标签用来指定自动生成的主键的属性（identity字段或者sequence序列） 该标签还包含两个可选项：-->
+        <!--	identity：当设置为TRUE时，该列会被标记为identity列，并且selectKey标签会被插入insert后面-->
+        <!--	type：type=post且identity=true时，生成的selectKey中order=After…… -->
+
+
+        <table tableName="%">
+                <generatedKey  column="id"  sqlStatement="Mysql"  identity="TRUE"/>
+           </table>
+
+        <!-- <table tableName="tea_order">
+                <generatedKey  column="id"  sqlStatement="Mysql"  identity="TRUE"/>
+           </table> -->
+
+        <!-- <table tableName="tea_order_goods">
+             <generatedKey  column="id"  sqlStatement="Mysql"  identity="TRUE"/>
+        </table> -->
+        <!--  <table tableName="table">
+              <generatedKey  column="id"  sqlStatement="Mysql"  identity="TRUE"/>
+         </table> -->
+        <!--  <table tableName="goods_classify">
+              <generatedKey  column="id"  sqlStatement="Mysql"  identity="TRUE"/>
+         </table>
+         <table tableName="goods">
+              <generatedKey  column="id"  sqlStatement="Mysql"  identity="TRUE"/>
+         </table> -->
+
+    </context>
+</generatorConfiguration>
