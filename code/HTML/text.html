@@ -4,41 +4,29 @@
 <meta charset="utf-8">
 <title>无标题文档</title>
 </head>
-<form action="" method="post">
-    <label>用户名：<input type="text" id="username"></label>
-    <br>
-    <label>角色：
-        <br><input type="radio" name="role" value="0">普通用户  <input type="radio" name="role" value="1">管理员</label>
-    <br><br>
-    <button type="submit" id="send">测试ajax调用后台接口</button>
-</form>
-<br>
-<textarea name="" id="resText" cols="30" rows="10">测试测试测试！！！</textarea>
 
+<body>
+<h1>时间戳转换格式</h1>
 <script src="js/jquery-1.11.0.min.js"></script>
 <script src="js/cookie.js"></script>
 <script>
-    $(function(){
-        $('#send').click(function(){
-            var userName = $("#username").val();
-            var role = $('input:radio[name="role"]:checked').val();
-            $.ajax({
-                type: "GET",
-                url: "119.29.102.236/user/isRegistered",
-                data: {username:userName, role:role},
-                dataType: "json",
-                success: function(data){
-                    $('#resText').empty();
-                    $('#resText').html('测试成功！！');
-                },
-                error: function(result){
-                    $('#resText').empty();
-                    $('#resText').html('测试失败！！')
-                }
-            });
-        });
-    });
+    function formatDateTime(inputTime) {
+        var date = new Date(inputTime);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+    };
+
+    $('h1').html(formatDateTime(1525235417000));
 </script>
-<body>
 </body>
 </html>

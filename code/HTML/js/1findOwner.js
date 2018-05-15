@@ -1,45 +1,55 @@
-var books = findOwnerData;
-$(function () {
-  var $oResultBox = $('#listDeatil');
-
-  $('#paging').paging({
-    nowPage: 1,
-    allPages: Math.ceil(books.length / 5),
-    displayPage: 7,
-    callBack: function (now) {
-      var currentPages = now * 5 < books.length ? 5 : books.length - (now - 1) * 5;
-
-      $oResultBox.html('');
-
-      for (var i = 0; i < currentPages; i++) {
-        var num = (now - 1) * 5 + i;
-        var create_div = $('<button class="lostListBox" onClick="turnTo('+ num +');"></button>');
-        var _html = '<div class="list-group-item lostList"><h4 class="list-group-item-heading fl lostListHead"><img src="'+ books[num].imgUrl +'" alt=""></h4><div class="list-group-item-text fl lostListDesc"><h2 class="fabuTitlt">'+ books[num].fabuTitlt +'</h2><br><span>失物类型：&nbsp;</span><span>失物招领</span><br><span>发布者：&nbsp;</span><span class="fabuPerson">'+ books[num].fabuPerson +'</span><br><span>发布者身份：&nbsp;</span><span class="fabuType">'+ books[num].fabuType +'</span><br><span>发布时间：&nbsp;</span><span class="fabuTime">'+ books[num].fabuTime +'</span><br><span>发布地点：&nbsp;</span><span class="fabuLocation">'+ books[num].fabuLocation +'</span></div><div class="list-group-item-text fl clickNum"><p><span class="time">'+ books[num].dateTime +'</span>&nbsp;&nbsp;查阅数： <span class="checkNum">'+ books[num].checkNum +'</span></p><br><br><p><button id="'+ num +'" disabled="true"></button></p><br><br><p>了解详情 &nbsp;&nbsp;&gt;&gt;</p></div></div>';
+//alert(books);
+function createDiv(pageNumber){
+    var books = findOwner;
+    for (var i = 0; i < 5; i++) {
+        //var num = (number - 1) * 5 + i;
+        var num = i;
+        var roletype;
+        if(books[num].role == 0){
+            roletype = '普通用户';
+        }else if(books[num].role == 1){
+            roletype = '管理员';
+        }
+        var create_div = $('<button class="lostListBox" onClick="turnTo('+num+','+pageNumber+')"></button>');
+        var _html = '<div class="list-group-item lostList"><h4 class="list-group-item-heading fl lostListHead"><img src="" alt=""></h4><div class="list-group-item-text fl lostListDesc"><h2 class="fabuTitlt">'+ books[num].title +'</h2><br><span>失物类型：&nbsp;</span><span>失物招领</span><br><span>发布者：&nbsp;</span><span class="fabuPerson">'+ books[num].username +'</span><br><span>发布者身份：&nbsp;</span><span class="fabuType">'+ roletype +'</span><br><span>发布时间：&nbsp;</span><span class="fabuTime">'+ formatDateTime(books[num].create_time) +'</span><br><span>发布地点：&nbsp;</span><span class="fabuLocation">'+ books[num].found_address +'</span></div><div class="list-group-item-text fl clickNum"><p><span class="time">'+ formatDateTime(books[num].create_time) +'</span>&nbsp;&nbsp;查阅数： <span class="checkNum">'+ books[num].click_num +'</span></p><br><br><p><button id="'+ num +'" disabled="true"></button></p><br><br><p>了解详情 &nbsp;&nbsp;&gt;&gt;</p></div></div>';
 
         create_div.html(_html).addClass('animated fadeIn');
         $oResultBox.append(create_div);
-      }
-	  
-      for (var i = 0; i < currentPages; i++) {
-        var num = (now - 1) * 5 + i;
-		var state = books[num].state;
-		var btns = document.getElementById(num);
-		//console.log(state);
-		if(state === 1){	
-			btns.innerHTML = "招领成功";
-			btns.setAttribute("class","btn btn-lg btn-warning");
-		}else if(state === 0){	
-			btns.innerHTML = "招领中…";
-			btns.setAttribute("class","btn btn-lg btn-danger");
-		}
-	  }
-	}
-  });
-  
-});
+    };
+   for (var i = 0; i < 5; i++) {
+       //var num = (n - 1) * 5 + i;
+       num = i;
+       var state = books[num].state;
+       var btns = document.getElementById(num);
+       //console.log(state);
+       if(state === 2){
+           btns.innerHTML = "寻找成功";
+           btns.setAttribute("class","btn btn-lg btn-warning");
+       }else if(state === 1){
+           btns.innerHTML = "寻找中…";
+           btns.setAttribute("class","btn btn-lg btn-danger");
+       }
+   }
+};
 
-function turnTo(p){	
+function prevPage(){
+    pageNumber = pageNumber-1;
+    if(pageNumber<1){
+        number = 1;
+        findOwnerDatas(pageNumber);
+    }else{
+        findOwnerDatas(pageNumber);
+    }
+}
+function nextPage(){
+    pageNumber=pageNumber+1;
+    //alert(pageNumber);
+    findOwnerDatas(pageNumber);
+}
+function turnTo(p,pageNumber){
 	//qext.LocalStorage.save(p);
+    //alert(p);
 	setCookie('infoFindOwnerNum',p);//记录是从哪个失物招领列表跳转进来的
+    setCookie('currentPageNum',pageNumber);//记录是第几页分页的记录
 	location.href = "1findOwner_detail.html";
 }

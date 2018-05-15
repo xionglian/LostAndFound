@@ -17,3 +17,4 @@ function getCookie(c_name) {
 	}
 	return ""
 }
+

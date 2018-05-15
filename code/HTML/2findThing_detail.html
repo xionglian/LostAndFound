@@ -22,12 +22,11 @@
             <br/>
             <span class="date"></span>
         </div>
-        
-        <div class="from fr">
-            <span class="username"><a href="8userManage.html">海绵宝宝依赖你的微笑</a></span>
-            <button class="btn btn-danger btn-sm" onClick="location.href = '0index.html';">退出</button>
+
+        <div class="fr userInfo">
+            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
         </div>
-    </div>
 </header>
 <!-- logo分区 -->
 <div class="logo">
@@ -121,6 +120,10 @@
                             <td id="tingsName">笔袋</td>
                         </tr>
                         <tr>
+                            <td>物品关键词</td>
+                            <td id="keyWord"></td>
+                        </tr>
+                        <tr>
                             <td>丢失地点</td>
                             <td id="location">一教106课室</td>
                         </tr>
@@ -189,7 +192,7 @@
 </footer>
 <!-- js -->
 <script src="js/cookie.js"></script>
-<script src="js/2findThingdata.js"></script>
+<script src="js/userInfo.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({

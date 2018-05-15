@@ -22,12 +22,11 @@
             <br/>
             <span class="date"></span>
         </div>
-        
-        <div class="from fr">
-            <span class="username"><a href="8userManage.html">海绵宝宝依赖你的微笑</a></span>
-            <button class="btn btn-danger btn-sm" onClick="location.href = '0index.html';">退出</button>
+
+        <div class="fr userInfo">
+            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
         </div>
-    </div>
 </header>
 <!-- logo分区 -->
 <div class="logo">
@@ -105,8 +104,8 @@
                         	<img src="image/icon/detail_ico.png" alt="">&nbsp;&nbsp;具体详情
                         </caption>
                         <tr>
-                            <td>发布者</td>
-                            <td id="fabuPerson">廖莉同学</td>
+                            <td class="col-sm-2">发布者</td>
+                            <td class="col-sm-8" id="fabuPerson">廖莉同学</td>
                         </tr>
                         <tr>
                             <td>发布者身份</td>
@@ -121,6 +120,10 @@
                             <td id="tingsName">笔袋</td>
                         </tr>
                         <tr>
+                            <td>物品关键词</td>
+                            <td id="keyWord"></td>
+                        </tr>
+                        <tr>
                             <td>拾取地点</td>
                             <td id="location">一教106课室</td>
                         </tr>
@@ -133,8 +136,8 @@
                             <td id="contactNum">13450740290</td>
                         </tr>
                         <tr>
-                            <td>发布时间</td>
-                            <td id="fabuTime">2018-4-28 16:30</td>
+                            <td>拾取时间</td>
+                            <td id="pickupTime">2018-4-28 16:30</td>
                         </tr>
                         <tr>
                             <td>具体描述</td>
@@ -193,9 +196,7 @@
 </footer>
 <!-- js -->
 <script src="js/cookie.js"></script>
-<!--<script src="js/jquery.utils.js"></script>
-<script src="js/localstorage.js"></script>
---><script src="js/1findOwnerdata.js"></script>
+<script src="js/userInfo.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({
@@ -204,6 +205,7 @@ $(document).ready(function(e) {
 	$(".date").jtime({
 		format: "yyyy-MM-dd  星期W"
 	})
+
 });
 </script>
 <script src="js/1findOwner_detail.js"></script>

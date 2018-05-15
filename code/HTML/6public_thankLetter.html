@@ -23,10 +23,10 @@
             <br/>
             <span class="date"></span>
         </div>
-        
-        <div class="from fr">
-            <span class="username"><a href="8userManage.html">海绵宝宝依赖你的微笑</a></span>
-            <button class="btn btn-danger btn-sm" onClick="location.href = '0index.html';">退出</button>
+
+        <div class="fr userInfo">
+            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
         </div>
     </div>
 </header>
@@ -95,11 +95,11 @@
                             <textarea name="" id="thanksLetter" class="form-control" cols="30" rows="14" placeholder="请在此处输入您想要表达的感谢内容"></textarea>
                         </div>
                     </div>
-                    <div class="form-group" style="text-align: center;">
-                          <button type="submit" class="btn btn-success">提交</button>
-                          <button class="btn btn-warning">取消</button>
-                    </div>
                 </form>
+                <div class="form-group" style="text-align: center;">
+                    <button class="btn btn-success" onclick="publicThank();"> 提交</button>
+                    <button class="btn btn-warning">取消</button>
+                </div>
             </div>
         </div>
 	</div>
@@ -144,6 +144,8 @@
     </div>
 </footer>
 <!-- js -->
+<script src="js/cookie.js"></script>
+<script src="js/userInfo.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({
@@ -153,14 +155,47 @@ $(document).ready(function(e) {
 		format: "yyyy-MM-dd  星期W"
 	})
 });
+function publicThank(){
+    var title = $('#title').val();
+    var userName = userInfoRes.username;
+    var letterContent = $('#thanksLetter').val();
 
-window.onload = function() {
-		$('#denglu').click(function(e) {
-            
-        });
-		$('#zhuce').click(function(e) {
-            
-        });
+    $.ajax({
+        type:'post',
+        url:'http://119.29.102.236/thanks/add',
+        data:JSON.stringify({
+            "title":title,
+            "publisher":userName,
+            "goodName":letterContent
+        }),
+        dataType:'json',
+        contentType:'application/json; charset=utf-8',
+        /*beforeSend:function(){
+            if(!$title){
+                alert('发布信息的标题不能为空，请输入标题');
+                return false;
+            }
+            if(!letterContent){
+                alert('内容不能为空，请填写信息');
+                return false;
+            }
+        },*/
+        success:function(data){
+            var res = data.result;
+            var id = data.data;
+            alert(JSON.stringify(data));
+            if(res === "success"){
+                alert('发布感谢信成功！');
+                location.href = '5thanksLetter.html';
+            }else if(res === "fail"){
+                alert(id);
+            }
+        },
+        error:function(){
+            alert(data.data);
+        }
+    })
+
 }
 </script>
 </body>

@@ -115,3 +115,4 @@ $('.aside_navbar li').click(function(e) {
 	$(this).addClass('act').siblings().removeClass('act');
 	$('.aside_content .content').eq(index).addClass('current').siblings().removeClass('current');
 });
+

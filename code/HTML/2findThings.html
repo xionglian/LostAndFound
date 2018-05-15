@@ -23,12 +23,11 @@
             <br/>
             <span class="date"></span>
         </div>
-        
-        <div class="from fr">
-            <span class="username"><a href="8userManage.html">海绵宝宝依赖你的微笑</a></span>
-            <button class="btn btn-danger btn-sm" onClick="location.href = '0index.html';">退出</button>
+
+        <div class="fr userInfo">
+            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
         </div>
-    </div>
 </header>
 <!-- logo分区 -->
 <div class="logo">
@@ -75,8 +74,9 @@
                               <option>白云校区</option>
                               <option>西校区</option>
                             </select>
-                            <button class="btn btn-warning" onClick="location.href='4public_findThing.html'">发布寻物启事</button>
+                            <button class="btn btn-primary" style="top: -2px;">搜索</button>
                         </form>
+                        <button class="btn btn-warning" style="position: relative; left: 220px; top: -34px;" onClick="location.href='4public_findThing.html'">发布寻物启事</button>
                     </div>
                     <ol class="breadcrumb fr">
                         <li>您现在的位置：</li>
@@ -88,14 +88,14 @@
         </div>
         <div class="list-group" id="listDeatil"></div>
         <div id="paging">
-            <div class="first">首页</div>
-            <div class="prev">上一页</div>
-            <ul class="list"></ul>
-            <div class="go">
-              <input type="text" placeholder="Goto">
-              <button>跳转</button>
-            </div>
-            <div class="next">下一页</div>
+            <div class="first" onclick="findThingDatas(1)">首页</div>
+            <div class="prev" onclick="prevPage();">上一页</div>
+            <div class="first" onclick="findThingDatas(1)">1</div>
+            <div class="first" onclick="findThingDatas(2)">2</div>
+            <div class="first" onclick="findThingDatas(3)">3</div>
+            <div class="first" onclick="findThingDatas(4)">4</div>
+            <div class="first" onclick="findThingDatas(5)">5</div>
+            <div class="next" onclick="nextPage();">下一页</div>
             <div class="last">末页</div>
         </div>
         <br>
@@ -142,7 +142,7 @@
 </footer>
 <!-- js -->
 <script src="js/cookie.js"></script>
-<script src="js/paging.js"></script>
+<script src="js/userInfo.js"></script>
 <script src="js/2findThingdata.js"></script>
 <script src="js/2findThing.js"></script>
 <script>
@@ -152,7 +152,8 @@ $(document).ready(function(e) {
 	});
 	$(".date").jtime({
 		format: "yyyy-MM-dd  星期W"
-	})
+	});
+    findThingDatas(1);
 });
 </script>
 

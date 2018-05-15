@@ -22,23 +22,14 @@
             <br/>
             <span class="date"></span>
         </div>
-        
-        <form class="form-inline from fr" role="form">
-            <div class="form-group">
-                <label class="sr-only" for="user_name"><img src="image/icon/user.png" alt=""></label>
-                <input type="text" class="form-control" id="user_name" placeholder="请输入账号">
-            </div>
-            <div class="form-group form-psw">
-                <label class="sr-only" for="user_psw"><img src="image/icon/password.png" alt="">
-                </label>
-                <input type="password" class="form-control" id="user_psw" placeholder="请输入密码">
-            </div>
-            <div class="form-group btnBox">
-                <button id="denglu" class="btn btn-primary btn-sm" onClick="location.href = '02denglu.html';">登录</button>
-                <button id="zhuce" class="btn btn-info btn-sm" onClick="location.href = '01zhuce.html';">注册</button>
-            </div>
-        </form>
-
+        <div class="btnBox fr">
+            <button id="denglu" class="btn btn-primary btn-sm" onClick="location.href = '02denglu.html';">登录</button>
+            <button id="zhuce" class="btn btn-info btn-sm" onClick="location.href = '01zhuce.html';">注册</button>
+        </div>
+        <div class="fr userInfo" style="display: none;">
+            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
+        </div>
     </div>
 </header>
 <!-- logo分区 -->
@@ -64,10 +55,10 @@
             <li class="active"><a href="0index.html">首页</a></li>
             <li><a href="1findOwner.html">失物招领</a></li>
             <li><a href="2findThings.html">寻物启事</a></li>
-            <li><a href="#">发布失物招领</a></li>
-            <li><a href="#">发布寻物启事</a></li>
-            <li><a href="#">感谢信</a></li>
-            <li><a href="#">关于我们</a></li>
+            <li><a href="3public_findOwner.html">发布失物招领</a></li>
+            <li><a href="4public_findThing.html">发布寻物启事</a></li>
+            <li><a href="5thanksLetter.html">感谢信</a></li>
+            <li><a href="7aboutUs.html">关于我们</a></li>
         </ul>
     </div>
 </nav>
@@ -135,6 +126,7 @@
 </footer>
 <!-- js -->
 <script src="js/cookie.js"></script>
+<script src="js/userInfo.js"></script>
 <script>
 $(document).ready(function(e) {
 	$(".hours").jtime({
@@ -144,11 +136,27 @@ $(document).ready(function(e) {
 		format: "yyyy-MM-dd  星期W"
 	})
 });
-window.onload = function() {	
-}
+
+//用户退出
+    function exit(){
+        var url = "http://119.29.102.236/user/logout";
+        $.get(url, function (data) {
+            // 发送并显示返回内容
+            res = data.result;
+            resData = JSON.stringify(data.data);
+            //alert(resData);
+            if (res === "success") {
+                //alert(res.data);
+                setCookie('userInformation',resData);//存储用户数据
+                $('.userInfo').hide();
+                $('.btnBox').show();
+                $('#userName').html(re.username);
+            } else if(res == 'fail') {
+                alert(resData);
+            }
+        }, 'json');
+    }
 </script>
-<script src="js/1findOwnerdata.js"></script>
-<script src="js/2findThingdata.js"></script>
 <script src="js/0index.js"></script>
 </body>
 </html>

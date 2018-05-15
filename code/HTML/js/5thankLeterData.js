@@ -1,5 +1,30 @@
-//模拟数据
-var thanksLetterData = [
-    {user_imgUrl:'image/userimage01.png',fabuTitlt: '笔袋已找回，感谢刘同学的帮忙', fabuPerson: '廖莉同学', fabuTime: '2018-4-12 16:30', fabuLocation: '校本部' , dateTime: '2018-05-02  21:00', checkNum: '36',letterContent: '感谢张同学拾取到我的笔袋，并特意抽时间把笔袋送给我。万分感谢！好人！谢谢谢谢！！！'},
-    {user_imgUrl:'image/userimage02.jpg',fabuTitlt: '笔袋已找回，感谢刘同学的帮忙', fabuPerson: '廖莉同学', fabuTime: '2018-4-12 16:30', fabuLocation: '校本部' , dateTime: '2018-05-02  21:00', checkNum: '36',letterContent: '感谢张同学拾取到我的笔袋，并特意抽时间把笔袋送给我。万分感谢！好人！谢谢谢谢！！！'}
-];
+var $oResultBox = $('#listDeatil');
+var pageNumber;
+let thanksLetterData;
+function thinkLetterDatas(n) {
+    $oResultBox.empty();
+    pageNumber = n;
+    //alert(pageNumber);
+    //alert(number);
+    var url = "http://119.29.102.236/thanks/getAll";
+    var param = {}; // 组装发送参数
+    param['currentPage'] = n;
+    param['pageSize'] = 5;
+    //alert(JSON.stringify(param));
+    $.get(url, param, function (data) {
+        // 发送并显示返回内容
+        //res = JSON.stringify(data.result);
+        var res = data.result;
+        var resData = data.data;
+        //alert(JSON.stringify(resData));
+        if (res === "success") {
+            thanksLetterData = resData;
+            //alert(findOwner);
+            createDiv(pageNumber);
+        }
+        else if(res === "fail"){
+            alert(resData);
+        }
+    }, 'json');
+}
+

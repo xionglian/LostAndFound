@@ -1,71 +1,123 @@
 var things;
 var books;
+var pageNumber;
 $(function () {
-	books = findOwnerData;
-	things = findThingData;
-	findOwnerList();
-	findThingList();
+	findOwnerList(1);
+	findThingList(1);
 });
 
-function findOwnerList(){	
-	var $oResultBox = $('#lostListDeatil');
-	
-	$oResultBox.html('');
-	for (var i = 0; i < 3; i++) {
-		var num = i;
-		var create_div = $('<button class="lostListBox" onClick="findOwner('+ num +');"></button>');
-		var _html = '<div class="list-group-item lostList"><h4 class="list-group-item-heading fl lostListHead"><img src="'+ books[num].imgUrl +'" alt=""></h4><div class="list-group-item-text fl lostListDesc"><h2 class="fabuTitlt">'+ books[num].fabuTitlt +'</h2><br><span>失物类型：&nbsp;</span><span>失物招领</span><br><span>发布者：&nbsp;</span><span class="fabuPerson">'+ books[num].fabuPerson +'</span><br><span>发布者身份：&nbsp;</span><span class="fabuType">'+ books[num].fabuType +'</span><br><span>发布时间：&nbsp;</span><span class="fabuTime">'+ books[num].fabuTime +'</span><br><span>发布地点：&nbsp;</span><span class="fabuLocation">'+ books[num].fabuLocation +'</span></div><div class="list-group-item-text fl clickNum"><p><span class="time">'+ books[num].dateTime +'</span>&nbsp;&nbsp;查阅数： <span class="checkNum">'+ books[num].checkNum +'</span></p><br><br><p><button id="'+ num +'" disabled="true"></button></p><br><br><p>了解详情 &nbsp;&nbsp;&gt;&gt;</p></div></div>';
-		
-		create_div.html(_html).addClass('animated fadeIn');
-		$oResultBox.append(create_div);
-	}
-	for (var j = 0; j < 3; j++) {
-		var num1 = j;
-		var state = books[num1].state;
-		var btns = document.getElementById(num1);
-		//console.log(state);
-		if(state === 1){	
-			btns.innerHTML = "招领成功";
-			btns.setAttribute("class","btn btn-lg btn-warning");
-		}else if(state === 0){	
-			btns.innerHTML = "招领中…";
-			btns.setAttribute("class","btn btn-lg btn-danger");
-		}
-	}
-}
-function findThingList(){
-	var $oResultBox = $('#findListDeatil');
-	
-	$oResultBox.html('');
-	for (var i = 3; i < 6; i++) {
-		var num = i - 3;
-		var create_div = $('<button class="lostListBox" onClick="findThing('+ num +');"></button>');
-		var _html = '<div class="list-group-item lostList"><h4 class="list-group-item-heading fl lostListHead"><img src="'+ things[num].imgUrl +'" alt=""></h4><div class="list-group-item-text fl lostListDesc"><h2 class="fabuTitlt">'+ things[num].fabuTitlt +'</h2><br><span>失物类型：&nbsp;</span><span>寻物启事</span><br><span>发布者：&nbsp;</span><span class="fabuPerson">'+ things[num].fabuPerson +'</span><br><span>发布者身份：&nbsp;</span><span class="fabuType">'+ things[num].fabuType +'</span><br><span>发布时间：&nbsp;</span><span class="fabuTime">'+ things[num].fabuTime +'</span><br><span>发布地点：&nbsp;</span><span class="fabuLocation">'+ things[num].fabuLocation +'</span></div><div class="list-group-item-text fl clickNum"><p><span class="time">'+ things[num].dateTime +'</span>&nbsp;&nbsp;查阅数： <span class="checkNum">'+ things[num].checkNum +'</span></p><br><br><p><button id="'+ i +'" disabled="true"></button></p><br><br><p>了解详情 &nbsp;&nbsp;&gt;&gt;</p></div></div>';
-		
-		create_div.html(_html).addClass('animated fadeIn');
-		$oResultBox.append(create_div);
-	}
-	for (var j = 3; j < 6; j++) {
-		var num1 = j - 3;
-		var btnstate = things[num1].state;
-		var obtns = document.getElementById(j);
-		//console.log(state);
-		if(btnstate === 1){	
-			obtns.innerHTML = "寻找成功";
-			obtns.setAttribute("class","btn btn-lg btn-warning");
-		}else if(btnstate === 0){	
-			obtns.innerHTML = "寻找中…";
-			obtns.setAttribute("class","btn btn-lg btn-danger");
-		}
-	}
+function findOwnerList(n){
+    var $oResultBox1 = $('#lostListDeatil');
+    $oResultBox1.empty();
+    pageNumber = n;
+    var url = "http://119.29.102.236/found/getAll";
+    var param = {}; // 组装发送参数
+    param['currentPage'] = n;
+    param['pageSize'] = 5;
+    //alert(JSON.stringify(param));
+    $.get(url, param, function (data) {
+        // 发送并显示返回内容
+        //res = JSON.stringify(data.result);
+        var res = data.result;
+        var resData = data.data.foundList;
+        //alert(JSON.stringify(resData));
+        //alert(resData[0].role)
+        if (res === "success") {
+            books = resData;
+            for (var i = 0; i < 3; i++) {
+                //var num = (number - 1) * 5 + i;
+                var num = i;
+                var roletype;
+                if(books[num].role == 0){
+                    roletype = '普通用户';
+                }else if(books[num].role == 1){
+                    roletype = '管理员';
+                }
+
+                var create_div = $('<button class="lostListBox" onClick="findOwner('+num+','+pageNumber+')"></button>');
+                var _html = '<div class="list-group-item lostList"><h4 class="list-group-item-heading fl lostListHead"><img src="" alt=""></h4><div class="list-group-item-text fl lostListDesc"><h2 class="fabuTitlt">'+ books[num].title +'</h2><br><span>失物类型：&nbsp;</span><span>失物招领</span><br><span>发布者：&nbsp;</span><span class="fabuPerson">'+ books[num].username +'</span><br><span>发布者身份：&nbsp;</span><span class="fabuType">'+ roletype +'</span><br><span>发布时间：&nbsp;</span><span class="fabuTime">'+ formatDateTime(books[num].create_time) +'</span><br><span>发布地点：&nbsp;</span><span class="fabuLocation">'+ books[num].found_address +'</span></div><div class="list-group-item-text fl clickNum"><p><span class="time">'+ formatDateTime(books[num].create_time) +'</span>&nbsp;&nbsp;查阅数： <span class="checkNum">'+ books[num].click_num +'</span></p><br><br><p><button id="'+ num +'" disabled="true"></button></p><br><br><p>了解详情 &nbsp;&nbsp;&gt;&gt;</p></div></div>';
+
+                create_div.html(_html).addClass('animated fadeIn');
+                $oResultBox1.append(create_div);
+            };
+            for (var j = 0; j < 3; j++) {
+                //var num = (n - 1) * 5 + i;
+                var num = j;
+                var state = books[num].state;
+                var btns = document.getElementById(num);
+                //console.log(state);
+                if(state === 2){
+                    btns.innerHTML = "寻找成功";
+                    btns.setAttribute("class","btn btn-lg btn-warning");
+                }else if(state === 1){
+                    btns.innerHTML = "寻找中…";
+                    btns.setAttribute("class","btn btn-lg btn-danger");
+                }
+            }
+        }
+    }, 'json');
+};
+function findThingList(n){
+	var $oResultBox2 = $('#findListDeatil');
+    $oResultBox2.empty();
+    pageNumber = n;
+    //alert(pageNumber);
+    //alert(number);
+    var url = "http://119.29.102.236/lost/getAll";
+    var param = {}; // 组装发送参数
+    param['currentPage'] = n;
+    param['pageSize'] = 5;
+    //alert(JSON.stringify(param));
+    $.get(url, param, function (data) {
+        // 发送并显示返回内容
+        //res = JSON.stringify(data.result);
+        var res = data.result;
+        var resData = data.data.lostList;
+        //alert(resData.username);
+        if (res === "success") {
+            things = resData;
+            //alert(findOwner);
+            for (var i = 3; i < 6; i++) {
+                var num = i - 3;
+                var roletype;
+                if(things[num].role == 0){
+                    roletype = '普通用户';
+                }else if(things[num].role == 1){
+                    roletype = '管理员';
+                }
+
+                var create_div = $('<button class="lostListBox" onClick="findThing('+ num +','+pageNumber+');"></button>');
+                var _html = '<div class="list-group-item lostList"><h4 class="list-group-item-heading fl lostListHead"><img src="'+ things[num].picture_url +'" alt=""></h4><div class="list-group-item-text fl lostListDesc"><h2 class="fabuTitlt">'+ things[num].title +'</h2><br><span>失物类型：&nbsp;</span><span>寻物启事</span><br><span>发布者：&nbsp;</span><span class="fabuPerson">'+ things[num].username +'</span><br><span>发布者身份：&nbsp;</span><span class="fabuType">'+ roletype +'</span><br><span>发布时间：&nbsp;</span><span class="fabuTime">'+ formatDateTime(things[num].create_time) +'</span><br><span>发布地点：&nbsp;</span><span class="fabuLocation">'+ things[num].lost_address +'</span></div><div class="list-group-item-text fl clickNum"><p><span class="time">'+ formatDateTime(things[num].create_time) +'</span>&nbsp;&nbsp;查阅数： <span class="checkNum">'+ things[num].click_num +'</span></p><br><br><p><button id="'+ i +'" disabled="true"></button></p><br><br><p>了解详情 &nbsp;&nbsp;&gt;&gt;</p></div></div>';
+
+                create_div.html(_html).addClass('animated fadeIn');
+                $oResultBox2.append(create_div);
+            }
+            for (var j = 3; j < 6; j++) {
+                var num1 = j - 3;
+                var btnstate = things[num1].state;
+                var obtns = document.getElementById(j);
+                //console.log(state);
+                if(btnstate === 2){
+                    obtns.innerHTML = "寻找成功";
+                    obtns.setAttribute("class","btn btn-lg btn-warning");
+                }else if(btnstate === 1){
+                    obtns.innerHTML = "寻找中…";
+                    obtns.setAttribute("class","btn btn-lg btn-danger");
+                }
+            }
+        }
+    }, 'json');
+
 }
 
-function findOwner(p){	
-	setCookie('infoFindOwnerNum',p);//记录是从哪个失物招领列表跳转进来的
+function findOwner(p,pageNum){
+    setCookie('infoFindOwnerNum',p);//记录是从哪个失物招领列表跳转进来的
+    setCookie('currentPageNum',pageNum);//记录是从哪个分页数据跳转进来的
 	location.href = "1findOwner_detail.html";
 }
 
-function findThing(p){	
+function findThing(p,pageNum){
 	setCookie('infoFindThingNum',p);//记录是从哪个寻物启事列表跳转进来的
+    setCookie('currentThingsPageNum',pageNum);//记录是从哪个分页数据跳转进来的
 	location.href = "2findThing_detail.html";
 }

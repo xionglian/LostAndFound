@@ -10,6 +10,9 @@ body{
 	color:#787878; 
 	background: #ffffff;
 }
+button {
+	cursor: pointer;
+}
 a{
 	color:#787878;
 }
@@ -60,7 +63,7 @@ header,.footer{
 .form-inline .form-group{	
 	padding-left: 0.2rem;
 }
-.from,.btnBox{	
+.from,.btnBox,.userInfo{
 	line-height: 0.5rem;
 }
 .sr-only {
