@@ -27,6 +27,8 @@ public class PushMessageServiceImpl implements PushMessageService {
     @Override
     public List<PushMessage> getAll(HttpSession session) {
         User u = (User) session.getAttribute("user");
+        if(u == null)
+            return null;
         return getAll(u.getId());
     }
 

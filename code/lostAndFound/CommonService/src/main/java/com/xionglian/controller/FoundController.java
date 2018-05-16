@@ -7,19 +7,18 @@ import com.xionglian.model.User;
 import com.xionglian.service.FoundService;
 import com.xionglian.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by  xionglian on 2018-05-08.
  */
 @RestController
+
 @RequestMapping("/found")
 public class FoundController {
     @Autowired
@@ -34,15 +33,21 @@ public class FoundController {
     public ResMessage add(@RequestBody Found found,HttpSession session){
         ResMessage resMessage = new ResMessage();
         try {
-            found.setReleaseUserId(((User)session.getAttribute("user")).getId());
+            User user = (User)session.getAttribute("user");
+            if(null == user){
+                resMessage.setResult("fail");
+                resMessage.setData("用户未登录");
+                return  resMessage;
+            }
+            found.setReleaseUserId(user.getId());
             found.setCreateTime(new Date());
             found.setClickNum(0);
             if(foundService.add(found)>0){
                 resMessage.setResult("success");
-                resMessage.setData(found.toString());
+                resMessage.setData(found.getId());
             }
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -62,8 +67,11 @@ public class FoundController {
             Integer currentPage = request.getParameter("currentPage") == null ? 1:Integer.parseInt(request.getParameter("currentPage"));
             Integer pageSize = request.getParameter("pageSize") == null ? 5:Integer.parseInt(request.getParameter("pageSize"));
             resMessage.setResult("success");
-            resMessage.setData(foundService.getAll(currentPage,pageSize));
-        } catch (NumberFormatException e) {
+            HashMap map = new HashMap();
+            map.put("count",foundService.countAll());
+            map.put("foundList",foundService.getAllWithUser(currentPage,pageSize));
+            resMessage.setData(map);
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -94,7 +102,7 @@ public class FoundController {
                 resMessage.setResult("fail");
                 resMessage.setData("数据库修改失败");
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();

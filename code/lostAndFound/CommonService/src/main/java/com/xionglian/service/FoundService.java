@@ -19,4 +19,10 @@ public interface FoundService {
 
     public List<Found> getAll(Integer currentPage,Integer pageSize);
 
+    public List getAllWithUser(Integer currentPage,Integer pageSize);
+
+    public List<Found> getByCondition(String address,String keyword);
+
+    public long countAll();
+
 }

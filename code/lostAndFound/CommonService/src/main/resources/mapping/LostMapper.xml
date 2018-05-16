@@ -86,6 +86,18 @@
     good_name, lost_address, lost_address_detail, lost_time, create_time, description_detail, 
     key_word01, key_word02, key_word03, state, confirm_time, picture_url, click_num
   </sql>
+  <!-- 新增-->
+  <select id="selectAllWithUser" resultType="map">
+select
+lost.id,title ,release_user_id,confirm_found_user_id,link_name,link_phone,good_type
+,good_name,lost_address,lost_address_detail,lost_time,lost.create_time,description_detail,
+key_word01,key_word02,key_word03,state,confirm_time,picture_url,click_num
+,login_name,username,tel,mail,sex,role,user_img,school_location,second_school,user_class
+
+from lost INNER JOIN
+`user`
+ON lost.release_user_id = `user`.id
+  </select>
   <select id="selectByExample" parameterType="com.xionglian.model.LostExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

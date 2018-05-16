@@ -4,11 +4,9 @@ import com.google.gson.Gson;
 import com.xionglian.common.response.ResMessage;
 import com.xionglian.model.User;
 import com.xionglian.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +14,9 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by  xionglian on 2018-05-08.
  */
+@Slf4j
 @RestController
+
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -36,7 +36,7 @@ public class UserController {
             boolean result = userService.isRegistered(username,role);
             resMessage.setResult("success");
             resMessage.setData(result);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -46,24 +46,32 @@ public class UserController {
     }
     /**
      * 注册
-     * @param request
+     * @param user
      * @return
      */
     @RequestMapping(value = "register" ,method = RequestMethod.POST)
-    public ResMessage register(@RequestBody String request){
+    public ResMessage register(@RequestBody User user){
         ResMessage resMessage = new ResMessage();
         try {
-            Gson gson = new Gson();
-            User user = gson.fromJson(request, User.class);
-            if(userService.register(user)>0){
+            log.info("===============请求内容==============="+user);
+            if(null ==user.getLoginName()||null ==user.getRole()||null == user.getPassword()){
+                resMessage.setResult("fail");
+                resMessage.setData("请求缺少必要参数");
+                return resMessage;
+            }
+            int returncode = userService.register(user);
+            if(returncode>0){
                 resMessage.setResult("success");
                 resMessage.setData(true);
+            }else if(returncode == -2){
+                resMessage.setResult("fail");
+                resMessage.setData("用户名已被注册");
             }else{
-                resMessage.setResult("success");
-                resMessage.setData(false);
+                resMessage.setResult("fail");
+                resMessage.setData("数据库修改失败");
             }
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -93,7 +101,7 @@ public class UserController {
                 resMessage.setData(user);
             }
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -123,7 +131,7 @@ public class UserController {
                 resMessage.setData("注销失败");
             }
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -147,7 +155,26 @@ public class UserController {
                 resMessage.setData("修改失败");
             }
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
+            resMessage.setResult("fail");
+            resMessage.setData(e);
+            e.printStackTrace();
+        }finally {
+            return resMessage;
+        }
+    }
+    /**
+     * 查询所有用户信息
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "getAll" ,method = RequestMethod.GET)
+    public ResMessage getAll(){
+        ResMessage resMessage = new ResMessage();
+        try {
+           resMessage.setResult("success");
+           resMessage.setData(userService.selectAll());
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();

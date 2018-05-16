@@ -5,19 +5,18 @@ import com.xionglian.model.Lost;
 import com.xionglian.model.User;
 import com.xionglian.service.LostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by  xionglian on 2018-05-08.
  */
 @RestController
+
 @RequestMapping("/lost")
 public class LostController {
     @Autowired
@@ -32,15 +31,21 @@ public class LostController {
     public ResMessage add(@RequestBody Lost lost,HttpSession session){
         ResMessage resMessage = new ResMessage();
         try {
-            lost.setReleaseUserId(((User)session.getAttribute("user")).getId());
+            User user = (User)session.getAttribute("user");
+            if(null == user){
+                resMessage.setResult("fail");
+                resMessage.setData("用户未登录");
+                return  resMessage;
+            }
+            lost.setReleaseUserId(user.getId());
             lost.setCreateTime(new Date());
             lost.setClickNum(0);
             if(lostService.add(lost)>0){
                 resMessage.setResult("success");
-                resMessage.setData(lost.toString());
+                resMessage.setData(lost.getId());
             }
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -53,15 +58,18 @@ public class LostController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "getAll" ,method = RequestMethod.POST)
+    @RequestMapping(value = "getAll" ,method = RequestMethod.GET)
     public ResMessage getAll(HttpServletRequest request, HttpSession session){
         ResMessage resMessage = new ResMessage();
         try {
                 Integer currentPage = request.getParameter("currentPage") == null ? 1:Integer.parseInt(request.getParameter("currentPage"));
                 Integer pageSize = request.getParameter("pageSize") == null ? 5:Integer.parseInt(request.getParameter("pageSize"));
                 resMessage.setResult("success");
-                resMessage.setData(lostService.getAll(currentPage,pageSize));
-        } catch (NumberFormatException e) {
+                HashMap map = new HashMap();
+                map.put("count",lostService.countAll());
+                map.put("lostList",lostService.getAllWithUser(currentPage,pageSize));
+                resMessage.setData(map);
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -92,7 +100,7 @@ public class LostController {
                 resMessage.setResult("fail");
                 resMessage.setData("数据库修改失败");
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();

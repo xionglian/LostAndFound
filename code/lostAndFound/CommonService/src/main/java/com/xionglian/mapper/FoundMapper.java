@@ -18,6 +18,8 @@ public interface FoundMapper {
 
     List<Found> selectByExample(FoundExample example);
 
+    List selectAllWithUser();
+
     Found selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Found record, @Param("example") FoundExample example);

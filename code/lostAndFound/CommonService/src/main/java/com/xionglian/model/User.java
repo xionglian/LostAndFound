@@ -162,4 +162,26 @@ public class User {
     public void setPutFoundNum(Integer putFoundNum) {
         this.putFoundNum = putFoundNum;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", loginName='" + loginName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", tel='" + tel + '\'' +
+                ", mail='" + mail + '\'' +
+                ", sex=" + sex +
+                ", userImg='" + userImg + '\'' +
+                ", role=" + role +
+                ", schoolLocation='" + schoolLocation + '\'' +
+                ", secondSchool='" + secondSchool + '\'' +
+                ", userClass='" + userClass + '\'' +
+                ", createTime=" + createTime +
+                ", isLogin=" + isLogin +
+                ", putLostNum=" + putLostNum +
+                ", putFoundNum=" + putFoundNum +
+                '}';
+    }
 }

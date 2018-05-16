@@ -6,7 +6,7 @@ package com.xionglian.common.enums;
 public enum ResCodeEnum
 {
     SUCCESS("000000", "成功"),
-    ERROR99("TEA99999999", "系统内部错误："),
+    ERROR99("LostAndFound99999999", "系统内部错误："),
     ERROR01("TEA00000001", "查询商品列表失败"),
 
     ;

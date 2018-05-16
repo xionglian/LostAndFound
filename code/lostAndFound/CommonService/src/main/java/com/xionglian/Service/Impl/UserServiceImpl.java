@@ -40,6 +40,8 @@ public class UserServiceImpl implements UserService {
     public int register(User user) throws Exception {
         String orginalPassword = user.getPassword();
         user.setPassword(Md5.getMD5Str(orginalPassword));
+        if(isRegistered(user.getLoginName(),user.getRole()))
+            return -2;
         return userMapper.insertSelective(user);
     }
 
@@ -71,8 +73,7 @@ public class UserServiceImpl implements UserService {
         User u = new User();
         u.setId(userId);
         u.setIsLogin(false);
-        userMapper.updateByPrimaryKeySelective(u);
-        return 0;
+        return userMapper.updateByPrimaryKeySelective(u);
     }
 
     @Override

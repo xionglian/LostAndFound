@@ -7,10 +7,7 @@ import com.xionglian.model.User;
 import com.xionglian.service.FoundService;
 import com.xionglian.service.ThanksLetterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +17,7 @@ import java.util.Date;
  * Created by  xionglian on 2018-05-08.
  */
 @RestController
+
 @RequestMapping("/thanks")
 public class ThanksLetterController {
     @Autowired
@@ -34,12 +32,18 @@ public class ThanksLetterController {
     public ResMessage add(@RequestBody ThanksLetter thanksLetter, HttpSession session){
         ResMessage resMessage = new ResMessage();
         try {
-
-            if(thanksLetterService.add(thanksLetter,session)>0){
+            int returncode = thanksLetterService.add(thanksLetter,session);
+            if(returncode>0){
                 resMessage.setResult("success");
+            }else if(returncode == -2){
+                resMessage.setResult("fail");
+                resMessage.setResult("用户未登录");
+            }else{
+                resMessage.setResult("fail");
+                resMessage.setResult("修改数据库失败");
             }
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();
@@ -52,7 +56,7 @@ public class ThanksLetterController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "getAll" ,method = RequestMethod.POST)
+    @RequestMapping(value = "getAll" ,method = RequestMethod.GET)
     public ResMessage getAll(HttpServletRequest request, HttpSession session){
         ResMessage resMessage = new ResMessage();
         try {
@@ -60,7 +64,7 @@ public class ThanksLetterController {
             Integer pageSize = request.getParameter("pageSize") == null ? 5:Integer.parseInt(request.getParameter("pageSize"));
             resMessage.setResult("success");
             resMessage.setData(thanksLetterService.selectAll(currentPage,pageSize));
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);
             e.printStackTrace();

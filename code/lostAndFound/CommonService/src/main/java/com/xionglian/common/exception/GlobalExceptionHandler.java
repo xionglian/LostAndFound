@@ -19,8 +19,9 @@ public class GlobalExceptionHandler
     @ResponseBody
     public ResMessage handleBizExp(HttpServletRequest request, Exception ex){
         ResMessage resMessage = new ResMessage();
-//        resMessage.setErrCode(ResCodeEnum.ERROR99.getCode());
-//        resMessage.setErrMsg(ResCodeEnum.ERROR99.getDesc()+ex.getMessage());
+        resMessage.setResult(ResCodeEnum.ERROR99.getCode());
+        resMessage.setData(ResCodeEnum.ERROR99.getDesc()+ex.getMessage());
+        ex.printStackTrace();
         log.info("exception handler:{}",ex.getStackTrace());
         return  resMessage;
     }

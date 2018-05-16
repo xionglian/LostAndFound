@@ -29,6 +29,8 @@ public class ThanksLetterServiceImpl implements ThanksLetterService{
     @Override
     public int add(ThanksLetter thanksLetter, HttpSession session) {
         User u = (User)session.getAttribute("user");
+        if(u == null)
+            return -2;
         thanksLetter.setLoginUser(u.getId());
         thanksLetter.setUserImgUrl(u.getUserImg());
         thanksLetter.setCreateTime(new Date());
