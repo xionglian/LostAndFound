@@ -15,3 +15,4 @@ if(user.length>0){
 	}
 	$('#fabuPerson').attr({'placeholder':userInfoRes.username,'disabled':'true'});
 }
+

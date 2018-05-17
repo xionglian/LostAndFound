@@ -23,10 +23,10 @@
             <br/>
             <span class="date"></span>
         </div>
-        
-        <div class="from fr">
-            <span class="username"><a href="9manager.html">自律会管理员</a></span>
-            <button class="btn btn-danger btn-sm" onClick="location.href = '0index.html';">退出</button>
+
+        <div class="fr userInfo">
+            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
         </div>
 
     </div>
@@ -86,7 +86,7 @@
                     </ul>
                 </aside>
             	<article class="fl aside_content">
-                	<div class="content">
+                	<div class="content current">
                     	<br><br>
                         <p>欢迎您成为我们的一员</p>
                         <br><br>
@@ -114,9 +114,9 @@
                                         <option>西校区</option>
                                     </select>
                                 </div>
-                                <label for="thingType" class="col-sm-2 control-label">物品类型</label>
+                                <label for="thingType01" class="col-sm-2 control-label">物品类型</label>
                                 <div class="col-sm-2">
-                                    <select class="form-control" id="thingType">
+                                    <select class="form-control" id="thingType01">
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                         </form>
-                        <table>
+                        <table class="table">
                         	<thead>
                             	<th></th>
                             	<th>标题</th>
@@ -166,13 +166,13 @@
                                         <option>西校区</option>
                                     </select>
                                 </div>
-                                <label for="thingType" class="col-sm-2 control-label">物品类型</label>
+                                <label for="thingType02" class="col-sm-2 control-label">物品类型</label>
                                 <div class="col-sm-2">
-                                    <select class="form-control" id="thingType">
+                                    <select class="form-control" id="thingType02">
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <select class="form-control" id="thingName">
+                                    <select class="form-control" id="thingName02">
                                     </select>
                                 </div>
                                 <div class="col-sm-4" style="text-align: right;">
@@ -181,7 +181,7 @@
                                 </div>
                             </div>
                         </form>
-                        <table>
+                        <table class="table">
                             <thead>
                             <th></th>
                             <th>标题</th>
@@ -249,6 +249,7 @@
                         <form class="form-horizontal" role="form">
                         	<div class="form-group">
                                 <table class="table">
+
                                   <thead>
                                     <tr>
                                       <th></th>
@@ -283,19 +284,39 @@
                             </div>
                         </form>
                     </div>
-                	<div class="content current">
+                    <div class="content">
                         <form class="form-horizontal" role="form">
-                        	<div class="form-group">
+                            <form action="" class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <div class=" col-sm-2">
+                                        <select class="form-control">
+                                            <option>校本部</option>
+                                            <option>白云校区</option>
+                                            <option>西校区</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-10" style="text-align: right;">
+                                        <button class="btn btn-info">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button class="btn btn-primary">导出</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="form-group">
                                 <table class="table">
-                                  <thead>
+                                    <thead>
                                     <tr>
-                                      <th></th>
-                                      <th>时间</th>
-                                      <th>系统消息</th>
-                                      <th>是否删除</th>
+                                        <th></th>
+                                        <th>用户名</th>
+                                        <th>校区</th>
+                                        <th>学院</th>
+                                        <th>班级</th>
+                                        <th>联系方式</th>
+                                        <th>发布失物招领次数</th>
+                                        <th>发布寻物启示次数</th>
                                     </tr>
-                                  </thead>
-                                  <tbody id="tab_inform"></tbody>
+                                    </thead>
+                                    <tbody id="userTab_inform"></tbody>
                                 </table>
                             </div>
                             <div id="paging3">
@@ -303,20 +324,64 @@
                                 <div class="prev">上一页</div>
                                 <ul class="list"></ul>
                                 <div class="go">
-                                  <input type="text" placeholder="Goto">
-                                  <button>跳转</button>
+                                    <input type="text" placeholder="Goto">
+                                    <button>跳转</button>
                                 </div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>
+                        </form>
+                    </div>
+                    <div class="content" style="padding-top: 20px; padding-bottom: 40px;">
+                        <form class="form-horizontal" role="form">
                             <br>
-                            <div class="form-group" style="text-align: center;">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
-                                  <button class="btn btn-warning">取消</button>
+                            <div class="form-group">
+                                <label for="location" class="col-sm-3 control-label">校区</label>
+                                <div class="col-sm-5" id="location" style="text-align: right;">
+                                    <select class="form-control">
+                                        <option>校本部</option>
+                                        <option>白云校区</option>
+                                        <option>西校区</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="loginName" class="col-sm-3 control-label">管理员登录名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="loginName" autocomplete="off" placeholder="请输入您的管理员登录名，由字母组成">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="managerName" class="col-sm-3 control-label">管理员名称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="managerName" autocomplete="off" placeholder="请输入您的管理员名称：校区 + 自律会 +名称">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-3 control-label">管理员密码</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="password" autocomplete="off" placeholder="请输入您的管理员密码，最少为6位数">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="repassword" class="col-sm-3 control-label">确认密码</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="repassword" autocomplete="off" placeholder="请输入您的管理员密码，最少为6位数">
                                 </div>
                             </div>
                         </form>
+                        <br>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8">
+                                <button class="btn btn-success" style="margin-right: 100px;">提交</button>
+                                <button class="btn btn-warning">取消</button>
+                            </div>
+                        </div>
+
                     </div>
                 </article>
                 <br>

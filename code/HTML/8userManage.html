@@ -128,10 +128,10 @@
                                 <div class="col-sm-8">
                                     <div class="radio">
                                         <label for="male">
-                                            <input type="radio" name="male" id="male" value="male" checked> 男
+                                            <input type="radio" name="male" id="male" value="0"> 男
                                         </label> 
                                         <label for="female">
-                                            <input type="radio" name="female" id="female"  value="female"> 女
+                                            <input type="radio" name="male" id="female"  value="1"> 女
                                         </label> 
                                     </div>         
                                 </div>
@@ -161,14 +161,15 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="form-group" style="text-align: center;">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
-                                  <button class="btn btn-warning">取消</button>
-                                </div>
-                            </div>
-                            <br>
                         </form>
+                        <div class="form-group" style="text-align: center;">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <button class="btn btn-success" style="margin-right:50px;" onclick="userChange();">提交</button>
+                                <button class="btn btn-warning">取消</button>
+                            </div>
+                        </div>
+                        <br>
+
                     </div>
                 	<div class="content">
                         <form class="form-horizontal" role="form">
@@ -191,11 +192,6 @@
                             <div id="paging">
                                 <div class="first">首页</div>
                                 <div class="prev">上一页</div>
-                                <ul class="list"></ul>
-                                <div class="go">
-                                  <input type="text" placeholder="Goto">
-                                  <button>跳转</button>
-                                </div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>
@@ -229,11 +225,6 @@
                             <div id="paging2">
                                 <div class="first">首页</div>
                                 <div class="prev">上一页</div>
-                                <ul class="list"></ul>
-                                <div class="go">
-                                  <input type="text" placeholder="Goto">
-                                  <button>跳转</button>
-                                </div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>

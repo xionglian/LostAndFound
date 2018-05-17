@@ -51,20 +51,20 @@ function detail(){
     }
 
         $('.fabuTitlt').html(info[num].title);
-        $('.fabuTime').html(formatDateTime(info[num].create_time));
-        $('.checkNum').html(info[num].click_num);
-        $('.fabuContact').html(info[num].link_phone);
-        $('.fabuPerson').html(info[num].link_name);
+        $('.fabuTime').html(formatDateTime(info[num].createTime));
+        $('.checkNum').html(info[num].clickNum);
+        $('.fabuContact').html(info[num].linkPhone);
+        $('.fabuPerson').html(info[num].linkName);
         $('#fabuPerson').html(userInfoRes.username);
-        $('#thingsType').html(info[num].good_type);
-        $('#tingsName').html(info[num].good_name);
-    $('#keyWord').html(info[num].key_word01+'    '+info[num].key_word02+'    '+info[num].key_word03);
-        $('#location').html(info[num].found_address+info[num].found_address_detail);
+        $('#thingsType').html(info[num].goodType);
+        $('#tingsName').html(info[num].goodName);
+    $('#keyWord').html(info[num].keyWord01+'    '+info[num].keyWord02+'    '+info[num].keyWord03);
+        $('#location').html(info[num].foundAddress+info[num].foundAddressDetail);
         $('#findPerson').html();
 
-        $('#contactNum').html(info[num].link_phone);
-        $('#pickupTime').html(formatDateTime(info[num].found_time));
-        $('#thingsImage').attr('src',info[num].picture_url);
-        $('#detailDesc').html(info[num].description_detail);
+        $('#contactNum').html(info[num].linkPhone);
+        $('#pickupTime').html(formatDateTime(info[num].foundTime));
+        $('#thingsImage').attr('src',info[num].pictureUrl);
+        $('#detailDesc').html(info[num].descriptionDetail);
 };
 
