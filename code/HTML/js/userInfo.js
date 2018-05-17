@@ -1,5 +1,5 @@
 var user = getCookie('userInformation');//用户的基本信息；
-// alert(user)
+// alert(user.length)
 var userInfoRes = JSON.parse(user);
 if(user.length>0){
     $('.btnBox').hide();

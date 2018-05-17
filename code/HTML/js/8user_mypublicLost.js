@@ -50,7 +50,7 @@ function userChange(){
             }
         },
         success:function(data){
-            alert(data.result);
+            //alert(data.result);
             res = data.result;
             if(res == "success"){
                 alert('修改个人资料成功');
@@ -92,7 +92,7 @@ function mypublicLost(n){
                 $('#tab_Lost').append(_html);
             }
         }else{
-            alert(resData);
+            //alert(resData);
         }
     }, 'json');
 }
@@ -124,7 +124,7 @@ function mypublicFind(n){
                 $('#tab_Lost').append(_html);
             }
         }else{
-            alert(resData);
+            //alert(resData);
         }
     }, 'json');
 }
@@ -154,7 +154,7 @@ function sysInfo(n){
                 $('#tab_inform').append(_html);
             }
         }else{
-            alert(resData);
+            //alert(resData);
         }
     }, 'json');
 }

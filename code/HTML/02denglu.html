@@ -198,7 +198,7 @@ function realLogin(){
         //alert(resData);
         if (res === "success") {
             setCookie('userInformation',resData);//传递登录用户的信息
-            location.href = '0index.html';
+            location.href = 'index.html';
         } else if(res === "fail") {
             alert(resData);
         }

@@ -66,6 +66,9 @@ header,.footer{
 .from,.btnBox,.userInfo{
 	line-height: 0.5rem;
 }
+.userInfo{
+	display: none;
+}
 .sr-only {
     position: relative;
     top: 10px;

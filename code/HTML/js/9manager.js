@@ -50,7 +50,7 @@ function allFindOwner(n){
         //res = JSON.stringify(data.result);
         var res = data.result;
         var resData = data.data.foundList;
-        alert(JSON.stringify(resData));
+        //alert(JSON.stringify(resData));
         if (res === "success") {
             $('#tab_allFind').empty();
             findOwner = resData;

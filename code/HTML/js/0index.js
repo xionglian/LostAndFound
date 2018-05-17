@@ -20,7 +20,7 @@ function findOwnerList(n){
         //res = JSON.stringify(data.result);
         var res = data.result;
         var resData = data.data.foundList;
-        alert(JSON.stringify(data));
+        //alert(JSON.stringify(data));
         //alert(JSON.stringify(resData));
         //alert(resData[0].role)
         if (res === "success") {
@@ -72,7 +72,7 @@ function findThingList(n){
     $.get(url, param, function (data) {
         // 发送并显示返回内容
         //res = JSON.stringify(data.result);
-        alert(JSON.stringify(data));
+        //alert(JSON.stringify(data));
         var res = data.result;
         var resData = data.data.lostList;
         //alert(resData.username);
