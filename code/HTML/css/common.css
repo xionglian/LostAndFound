@@ -21,6 +21,16 @@ hr{
 	margin-top: 15px;
     margin-bottom: 15px;
 }
+table{
+	table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+}
+td{
+	width:100%;
+	word-break:keep-all;/* 不换行 */
+	white-space:nowrap;/* 不换行 */
+	overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
 /* 基本样式 */
 html{font-size: 100px;}
 body{	
@@ -203,7 +213,7 @@ input[type=checkbox]{
 }
 
 /* Paging分页样式 */
-#paging,#paging1 ,#paging2,#paging3{
+#paging,#paging1 ,#paging2,#paging3,#paging4{
   overflow: hidden;
   width: 100%;
   margin-top: 60px;
@@ -215,36 +225,36 @@ input[type=checkbox]{
   -moz-user-select: none;
   -ms-user-select: none;
 }
-#paging .first,#paging1 .first,#paging2 .first,#paging3 .first,
-#paging .last,#paging1 .last,#paging2 .last,#paging3 .last,
-#paging .prev,#paging1 .prev,#paging2 .prev,#paging3 .prev,
-#paging .next,#paging1 .next,#paging2 .next,#paging3 .next,
-#paging .list li,#paging1 .list li,#paging2 .list li,#paging3 .list li {
+#paging .first,#paging1 .first,#paging2 .first,#paging3 .first,#paging4 .first,
+#paging .last,#paging1 .last,#paging2 .last,#paging3 .last,#paging4 .last,
+#paging .prev,#paging1 .prev,#paging2 .prev,#paging3 .prev,#paging4 .prev,
+#paging .next,#paging1 .next,#paging2 .next,#paging3 .next,#paging4 .next,
+#paging .list li,#paging1 .list li,#paging2 .list li,#paging3 .list li,#paging4 .list li {
   display: inline-block;
   height: 30px;
   line-height: 30px;
   margin: 0 4px;
   padding: 0 10px;
   border: 1px solid #ddd;
-  cursor: default;
+  cursor: pointer;
   border-radius: 4px;
   vertical-align: top;
 }
-#paging .list,#paging1 .list,#paging2 .list,#paging3 .list {
+#paging .list,#paging1 .list,#paging2 .list,#paging3 .list,#paging4 .list {
   display: inline-block;
   vertical-align: top;
 }
-#paging .list li,#paging1 .list li,#paging2 .list li,#paging3 .list li {
+#paging .list li,#paging1 .list li,#paging2 .list li,#paging3 .list li,#paging4 .list li {
   width: 40px;
   padding: 0;
   text-align: center;
 }
-#paging .list li.cur,#paging1 .list li.cur,#paging2 .list li.cur,#paging3 .list li.cur{
+#paging .list li.cur,#paging1 .list li.cur,#paging2 .list li.cur,#paging3 .list li.cur,#paging4 .list li.cur{
   color: #fff;
   background-color: #0099ff;
   border-color: #428bca;
 }
-#paging .go,#paging1 .go,#paging2 .go,#paging3 .go {
+#paging .go,#paging1 .go,#paging2 .go,#paging3 .go,#paging4 .go {
   display: none;
   position: relative;
   max-width: 160px;
@@ -252,7 +262,7 @@ input[type=checkbox]{
   text-align: left;
   border-radius: 4px;
 }
-#paging .go input,#paging1 .go input,#paging2 .go input,#paging3 .go input {
+#paging .go input,#paging1 .go input,#paging2 .go input,#paging3 .go input,#paging4 .go input {
   float: left;
   width: 70%;
   height: 30px;
@@ -263,7 +273,7 @@ input[type=checkbox]{
   color: #0099ff;
   border: 1px solid #ddd;
 }
-#paging .go button,#paging1 .go button,#paging2 .go button,#paging3 .go button {
+#paging .go button,#paging1 .go button,#paging2 .go button,#paging3 .go button,#paging4 .go button {
   width: 30%;
   position: absolute;
   border: none;
@@ -274,7 +284,7 @@ input[type=checkbox]{
   background-color: #0099ff;
   border-radius: 0 4px 4px 0;
 }
-#paging .disable,#paging1 .disable,#paging2 .disable,#paging3 .disable {
+#paging .disable,#paging1 .disable,#paging2 .disable,#paging3 .disable,#paging4 .disable {
   color: #bfbfbf;
   cursor: not-allowed;
 }

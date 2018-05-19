@@ -1,15 +1,30 @@
-$(function () {
-  mypublicLost(1);
-  mypublicFind(1);
-  sysInfo(1);
+/*--------------侧边栏点击事件-------------*/
+//修改密码
+$('#section01').click(function(){
+    $(this).addClass('act').siblings().removeClass('act');
+    $('.aside_content .content').eq(1).addClass('current').siblings().removeClass('current');
 });
-
-$('.aside_navbar li').click(function(e) {
-    var index = $(this).index()+1;
-	$(this).addClass('act').siblings().removeClass('act');
-	$('.aside_content .content').eq(index).addClass('current').siblings().removeClass('current');
+//查看我发布的失物招领
+$('#section02').click(function(){
+    $(this).addClass('act').siblings().removeClass('act');
+    $('.aside_content .content').eq(2).addClass('current').siblings().removeClass('current');
+    mypublicLost(1);
 });
+//查看我发布的寻物启事
+$('#section03').click(function(){
+    $(this).addClass('act').siblings().removeClass('act');
+    $('.aside_content .content').eq(3).addClass('current').siblings().removeClass('current');
+    mypublicFind(1);
+});
+//查看系统消息
+$('#section04').click(function(){
+    $(this).addClass('act').siblings().removeClass('act');
+    $('.aside_content .content').eq(4).addClass('current').siblings().removeClass('current');
+    sysInfo(1);
+})
 
+
+/*--------------点击后对应的响应函数-------------*/
 //修改密码
 function userChange(){
 	var firstName = $('#firstname').val();
@@ -25,6 +40,7 @@ function userChange(){
         type:'post',
         url:'http://119.29.102.236/user/updateUser',
         data:JSON.stringify({
+            "id":userInfoRes.id,
             "username":firstName,
             "password":repassword,
             "sex":sex,
@@ -50,16 +66,15 @@ function userChange(){
             }
         },
         success:function(data){
-            //alert(data.result);
+            alert(userInfoRes.id);
+            alert(JSON.stringify(data));
             res = data.result;
             if(res == "success"){
                 alert('修改个人资料成功');
+                window.location.reload();
             }else if(res == "fail"){
                 alert(data.data);
             }
-        },
-        error:function(){
-            alert('请求不成功');
         }
     })
 
@@ -74,25 +89,33 @@ function mypublicLost(n){
     arr1['pageSize']= 10;
     $.get(myPublicLostUrl, arr1, function (data) {
         // 发送并显示返回内容
-        //res = JSON.stringify(data.result);
-        res = data.result;
-        resData = JSON.stringify(data.data);
-        //resData = data.data.foundList;
-        //alert(res+resData);
-        if (res === "success") {
+        resData = data.data.foundList;
+        //alert(JSON.stringify(data));
+        if (data.result === "success") {
             mypublicLostList = resData;
             $('#tab_Lost').empty();
             //alert(findOwner);
-            for (var i = 0; i < data.data.count; i++) {
-                var num = i;
-                var number = i+1;
-                var _html = '<tr><td>'+number+'</td><td>'+mypublicLostList[num].title+'</td><td>'+mypublicLostList[num].goodType+'</td><td>'+mypublicLostList[num].goodName+'</td><td>'+formatDateTime(mypublicLostList[num].createTime)+'</td><td><img src="'+mypublicLostList[num].pictureUrl+'" alt="" width="130" height="auto" </img></td><td><label><input type="radio" name="lostState" value="1"> 招领中</label><br><label><input type="radio" name="lostState" value="2">认领成功</label></td>';
+            if(data.data.count > 0){
+                for (var i = 0; i < data.data.count; i++) {
+                    var num = i;
+                    var number = i+1;
+                    var _html = '<tr><td>'+number+'</td><td>'+mypublicLostList[num].title+'</td><td>'+mypublicLostList[num].goodType+'</td><td>'+mypublicLostList[num].goodName+'</td><td>'+formatDateTime(mypublicLostList[num].createTime)+'</td><td><img src="'+mypublicLostList[num].pictureUrl+'" alt="" width="130" height="auto" </img></td><td><label><input type="radio" name="lostState" value="1"> 招领中</label><br><label><input type="radio" name="lostState" value="2">认领成功</label></td>';
 
-                $('#tab_Lost').addClass('animated fadeIn');
-                $('#tab_Lost').append(_html);
+                    $('#tab_Lost').addClass('animated fadeIn');
+                    $('#tab_Lost').append(_html);
+                }
+            }else{
+                for (var i = 0; i < 10; i++) {
+                    var num = i;
+                    var number = i+1;
+                    var _html = '<tr></tr><td>'+number+'</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+                    $('#tab_Lost').addClass('animated fadeIn');
+                    $('#tab_Lost').append(_html);
+                }
+                alert('您还没有任何发布失物招领的记录！');
             }
-        }else{
-            //alert(resData);
+        } else{
+            alert(resData);
         }
     }, 'json');
 }
@@ -106,25 +129,32 @@ function mypublicFind(n){
     arr2['pageSize']= 10;
     $.get(myPublicFindUrl, arr2, function (data) {
         // 发送并显示返回内容
-        //res = JSON.stringify(data.result);
-        res = data.result;
-        resData = JSON.stringify(data.data);
-        //resData = data.data.foundList;
-        //alert(res+resData);
-        if (res === "success") {
-            mypublicFindList = resData;
-            $('#tab_Lost').empty();
-            //alert(findOwner);
-            for (var i = 0; i < data.data.count; i++) {
-                var num = i;
-                var number = i+1;
-                var _html = '<tr><td>'+number+'</td><td>'+mypublicFindList[num].title+'</td><td>'+mypublicFindList[num].goodType+'</td><td>'+mypublicFindList[num].goodName+'</td><td>'+formatDateTime(mypublicFindList[num].createTime)+'</td><td><img src="\'+mypublicList[num].pictureUrl+\'" alt="" width="130" height="auto" </img></td><td><label><input type="radio" name="findState" value="1"> 招领中</label><br><label><input type="radio" name="findState" value="2">认领成功</label></td>';
+        resData = data.data.lostList;
+        //alert(JSON.stringify(data));
+        if (data.result === "success") {
+            if(data.data.count > 0){
+                mypublicFindList = resData;
+                $('#tab_Find').empty();
+                for (var i = 0; i < data.data.count; i++) {
+                    var num = i;
+                    var number = i+1;
+                    var _html = '<tr><td>'+number+'</td><td>'+mypublicFindList[num].title+'</td><td>'+mypublicFindList[num].goodType+'</td><td>'+mypublicFindList[num].goodName+'</td><td>'+formatDateTime(mypublicFindList[num].createTime)+'</td><td><img src="\'+mypublicList[num].pictureUrl+\'" alt="" width="130" height="auto" </img></td><td><label><input type="radio" name="findState" value="1"> 招领中</label><br><label><input type="radio" name="findState" value="2">认领成功</label></td>';
 
-                $('#tab_Lost').addClass('animated fadeIn');
-                $('#tab_Lost').append(_html);
+                    $('#tab_Find').addClass('animated fadeIn');
+                    $('#tab_Find').append(_html);
+                }
+            }else{
+                for (var i = 0; i < 10; i++) {
+                    var num = i;
+                    var number = i+1;
+                    var _html = '<tr></tr><td>'+number+'</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+                    $('#tab_Find').addClass('animated fadeIn');
+                    $('#tab_Find').append(_html);
+                }
+                alert('您还没有任何发布失物招领的记录！');
             }
         }else{
-            //alert(resData);
+            alert(resData);
         }
     }, 'json');
 }
@@ -139,9 +169,13 @@ function sysInfo(n){
     $.get(systemInfoUrl, arr3, function (data) {
         // 发送并显示返回内容
         res = data.result;
-        resData = JSON.stringify(data.data);
-        //alert(res+resData);
+        resData = data.data;
+        alert(JSON.stringify(data));
         if (res === "success") {
+            alert(data.data.length);
+            if(data.data.length > 0){
+
+            }else{}
             systemInfo = resData;
             $('#tab_inform').empty();
             //alert(findOwner);

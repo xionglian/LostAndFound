@@ -98,13 +98,17 @@ function submit(){
             $submit.val('正在注册').addClass('disabled');
         },
         success:function(data){
-            //alert(JSON.stringify(data.result));
-            res = JSON.stringify(data.result);
-            if(res == "success"){
-                alert('注册成功，欢迎您成为我们校园失物信息共享平台的一员！请开始您的参观之旅吧');
-                location.href = '02denglu.html';
-            }else{
-                alert('不好意思，注册失败了！请稍候再进行注册，对您造成的不便之处，烦请谅解，谢谢配合！')
+            alert(JSON.stringify(data));
+            if(data.result == "success"){
+                alert(02)
+                if(data.data == true){
+                    alert('注册成功，欢迎您成为我们校园失物信息共享平台的一员！请开始您的参观之旅吧');
+                    location.href = '02denglu.html';
+                }else{
+                    alert(data.data)
+                }
+            }else if(res === "fail"){
+                alert(data.data)
             }
         },
         error:function(){

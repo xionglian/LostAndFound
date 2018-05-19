@@ -76,12 +76,12 @@
             <div class="list-group-item" style="overflow: hidden;">
             	<aside class="fl aside_navbar">
                 	<ul>
-                    	<li>查看所有的失物招领</li>
-                    	<li>查看所有的寻物启事</li>
-                    	<li>查看我发布的失物招领</li>
-                    	<li>查看我发布的寻物启事</li>
-                    	<li>查看所有的用户信息</li>
-                    	<li>增加管理员</li>
+                    	<li id="section01">查看所有的失物招领</li>
+                    	<li id="section02">查看所有的寻物启事</li>
+                    	<li id="section03">查看我发布的失物招领</li>
+                    	<li id="section04">查看我发布的寻物启事</li>
+                    	<li id="section05">查看所有的用户信息</li>
+                    	<li id="section06">增加管理员</li>
                     </ul>
                 </aside>
             	<article class="fl aside_content">
@@ -130,27 +130,22 @@
                         </form>
                         <table class="table">
                         	<thead>
-                            	<th></th>
+                            	<th style="width: 25px;"></th>
                             	<th>标题</th>
                             	<th>物品名称</th>
                             	<th>发布时间</th>
                             	<th>发布地点</th>
                             	<th>发布人</th>
                             	<th>拾取人</th>
-                            	<th>联系方式</th>
+                            	<th style="width: 110px;">联系方式</th>
                             	<th>物品状态</th>
                             	<th>备注</th>
                             </thead>
                             <tbody id="tab_allLost"></tbody>
                         </table>
                         <div id="paging">
-                            <div class="first">首页</div>
+                            <div class="first" onclick="allFindOwner(1)">首页</div>
                             <div class="prev">上一页</div>
-                            <ul class="list"></ul>
-                            <div class="go">
-                              <input type="text" placeholder="Goto">
-                              <button>跳转</button>
-                            </div>
                             <div class="next">下一页</div>
                             <div class="last">末页</div>
                         </div>
@@ -182,7 +177,7 @@
                         </form>
                         <table class="table">
                             <thead>
-                            <th></th>
+                            <th style="width: 25px;"></th>
                             <th>标题</th>
                             <th>物品名称</th>
                             <th>发布时间</th>
@@ -212,7 +207,7 @@
                                 <table class="table">
                                   <thead>
                                     <tr>
-                                      <th></th>
+                                      <th style="width: 25px;"></th>
                                       <th>标题</th>
                                       <th>物品类型</th>
                                       <th>物品名称</th>
@@ -224,14 +219,9 @@
                                   <tbody id="tab_Lost"></tbody>
                                 </table>
                             </div>
-                            <div id="paging">
+                            <div id="paging4">
                                 <div class="first">首页</div>
                                 <div class="prev">上一页</div>
-                                <ul class="list"></ul>
-                                <div class="go">
-                                  <input type="text" placeholder="Goto">
-                                  <button>跳转</button>
-                                </div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>
@@ -248,10 +238,9 @@
                         <form class="form-horizontal" role="form">
                         	<div class="form-group">
                                 <table class="table">
-
                                   <thead>
                                     <tr>
-                                      <th></th>
+                                      <th style="width: 25px;"></th>
                                       <th>标题</th>
                                       <th>物品类型</th>
                                       <th>物品名称</th>
@@ -266,11 +255,6 @@
                             <div id="paging2">
                                 <div class="first">首页</div>
                                 <div class="prev">上一页</div>
-                                <ul class="list"></ul>
-                                <div class="go">
-                                  <input type="text" placeholder="Goto">
-                                  <button>跳转</button>
-                                </div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>
@@ -305,12 +289,12 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th></th>
+                                        <th style="width: 25px;"></th>
                                         <th>用户名</th>
                                         <th>校区</th>
                                         <th>学院</th>
                                         <th>班级</th>
-                                        <th>联系方式</th>
+                                        <th style="width: 110px;">联系方式</th>
                                         <th>发布失物招领次数</th>
                                         <th>发布寻物启示次数</th>
                                     </tr>
@@ -319,13 +303,8 @@
                                 </table>
                             </div>
                             <div id="paging3">
-                                <div class="first">首页</div>
+                                <div class="first" onclick="allUserInfo(1);">首页</div>
                                 <div class="prev">上一页</div>
-                                <ul class="list"></ul>
-                                <div class="go">
-                                    <input type="text" placeholder="Goto">
-                                    <button>跳转</button>
-                                </div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>

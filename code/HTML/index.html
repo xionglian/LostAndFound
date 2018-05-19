@@ -137,25 +137,6 @@ $(document).ready(function(e) {
 	})
 });
 
-//用户退出
-    function exit(){
-        var url = "http://119.29.102.236/user/logout";
-        $.get(url, function (data) {
-            // 发送并显示返回内容
-            res = data.result;
-            resData = JSON.stringify(data.data);
-            //alert(resData);
-            if (res === "success") {
-                //alert(res.data);
-                setCookie('userInformation',resData);//存储用户数据
-                $('.userInfo').hide();
-                $('.btnBox').show();
-                $('#userName').html(re.username);
-            } else if(res == 'fail') {
-                alert(resData);
-            }
-        }, 'json');
-    }
 </script>
 <script src="js/0index.js"></script>
 </body>
