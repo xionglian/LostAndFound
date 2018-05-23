@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+
+section .fl{	
+	width: 34%;
+	height:auto;
+	padding: 0.2rem 3%;
+	box-sizing: border-box;
+	border: 1px solid #555;
+	text-align: center;
+	margin-bottom: 0.4rem;
+}
+section .fl>img{
+	width: 100%;
+}
+
+.denglu{	
+	width: 58%;
+}
+.dengluBox{	
+	width: 	80%;
+	height: 4rem;
+	margin: 0.2rem auto;
+	border: 1px solid #555555;
+	box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+}
+.dengluBox p{	
+	line-height: 0.8rem;
+	text-align: center;
+	font-size: 0.2rem;
+	letter-spacing: 4px;
+	border-bottom: 1px solid #000;
+	margin-bottom: 0.4rem;
+}
+.dengluBox a{	
+	color: red;
+	text-decoration: underline;
+}
+.radio{	
+	text-align: center;
+}
+.radio .manager{	
+	margin-right: 0.2rem;
+}
+.btn-success{	
+	margin-left: 0.3rem;
+	margin-right: 0.5rem;
+}

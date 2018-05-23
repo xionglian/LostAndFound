@@ -41,6 +41,12 @@ public class FoundServiceImpl implements FoundService{
     }
 
     @Override
+    public List getAllWithUser(Integer currentPage, Integer pageSize, Integer userId) {
+        PageHelper.startPage(currentPage,pageSize);
+        return foundMapper.selectAllWithUserByUserId(userId);
+    }
+
+    @Override
     public List<Found> getByCondition( String address, String keyword) {
         if(keyword == null)
             return null;
@@ -61,5 +67,12 @@ public class FoundServiceImpl implements FoundService{
     @Override
     public long countAll() {
         return foundMapper.countByExample(null);
+    }
+
+    @Override
+    public long countAll(Integer userId) {
+        FoundExample example = new FoundExample();
+        example.createCriteria().andReleaseUserIdEqualTo(userId);
+        return foundMapper.countByExample(example);
     }
 }

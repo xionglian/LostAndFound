@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>基于Java的校园失物信息共享平台</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/7aboutus.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js">
+</script>
+	<script src="js/Times.js"></script>
+</head>
+<body>
+<!-- header分区 -->
+<header>
+	<div class="container">
+    	<div class="time fl">
+        	<span class="hours"></span>
+            <br/>
+            <span class="date"></span>
+        </div>
+        <div class="fr userInfo">
+            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
+        </div>
+
+    </div>
+</header>
+<!-- logo分区 -->
+<div class="logo">
+	<div class="container">
+        <h1 class="fl logo_img">
+        	<img src="image/schoolLogo.png" class="img-responsive" alt="">
+        </h1>
+        <div class="search fr">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="请输入您要查找的物品名称">
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button">搜索</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- nav分区 -->
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+        <ul class="nav navbar-nav">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="1findOwner.html">失物招领</a></li>
+            <li><a href="2findThings.html">寻物启事</a></li>
+            <li><a href="3public_findOwner.html">发布失物招领</a></li>
+            <li><a href="4public_findThing.html">发布寻物启事</a></li>
+            <li><a href="5thanksLetter.html">感谢信</a></li>
+            <li><a href="7aboutUs.html">关于我们</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- content分区 -->
+<section>
+	<div class="container">
+        <div class="list-group" id="listHeader">
+            <div class="list-group-item active">
+                <h4 class="list-group-item-heading">
+                    管理员中心
+                    <ol class="breadcrumb fr">
+                        <li>您现在的位置：</li>
+                        <li>管理员中心</li>
+                    </ol>
+                </h4>
+            </div>        
+            <div class="list-group-item" style="overflow: hidden;">
+            	<aside class="fl aside_navbar">
+                	<ul>
+                    	<li>查看所有的失物招领</li>
+                    	<li>查看所有的寻物启事</li>
+                    	<li>查看我发布的失物招领</li>
+                    	<li>查看我发布的寻物启事</li>
+                    	<li>查看所有的用户信息</li>
+                    	<li>增加管理员</li>
+                    </ul>
+                </aside>
+            	<article class="fl aside_content">
+                	<div class="content current">
+                    	<br><br>
+                        <p>欢迎您成为我们的一员</p>
+                        <br><br>
+                        <p>小贴士：广东技术师范学院学生自律委员会失物招领值班时间：</p><br>
+                        <p>上午：11:35 - 12:05</p><br>
+                        <p>下午：16:45 - 17:25</p><br>
+                        <br>
+                        <p>失物招领值班地点：综合馆一楼</p>
+                        <br><br>
+                        <p>需要上交失物的同学请在工作时间段内来值班点进行现场<a href="3public_findOwner.html">&nbsp;&nbsp;失物登记&nbsp;&nbsp;</a>或<a href="4public_findThing.html">&nbsp;&nbsp;报失登记&nbsp;&nbsp;</a></p>
+                        <br><br>
+                        <p style="text-align: right; padding-right: 100px; box-sizing: border-box;">校园失物信息共享平台 宣</p>
+                        <br>
+                        <hr>
+                        <br>
+                        <p style="text-align: center;">广告服务：失物认领网广告服务，请联系广东技术师范学院学生自律委员会！</p>
+                    </div>
+                	<div class="content">
+                    	<form action="" class="form-horizontal" role="form">
+                            <div class="form-group">
+                            	<div class=" col-sm-2">
+                                    <select class="form-control">
+                                        <option>校本部</option>
+                                        <option>白云校区</option>
+                                        <option>西校区</option>
+                                    </select>
+                                </div>
+                                <label for="thingType01" class="col-sm-2 control-label">物品类型</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="thingType01">
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="thingName">
+                                    </select>
+                                </div>
+                                <div class="col-sm-4" style="text-align: right;">
+                                	<button class="btn btn-info">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                	<button class="btn btn-primary">导出</button>
+                                </div>
+                            </div>
+                        </form>
+                        <table class="table">
+                        	<thead>
+                            	<th></th>
+                            	<th>标题</th>
+                            	<th>物品名称</th>
+                            	<th>发布时间</th>
+                            	<th>发布地点</th>
+                            	<th>发布人</th>
+                            	<th>拾取人</th>
+                            	<th>联系方式</th>
+                            	<th>物品状态</th>
+                            	<th>备注</th>
+                            </thead>
+                            <tbody id="tab_allLost"></tbody>
+                        </table>
+                        <div id="paging">
+                            <div class="first">首页</div>
+                            <div class="prev">上一页</div>
+                            <ul class="list"></ul>
+                            <div class="go">
+                              <input type="text" placeholder="Goto">
+                              <button>跳转</button>
+                            </div>
+                            <div class="next">下一页</div>
+                            <div class="last">末页</div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <form action="" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class=" col-sm-2">
+                                    <select class="form-control">
+                                        <option>校本部</option>
+                                        <option>白云校区</option>
+                                        <option>西校区</option>
+                                    </select>
+                                </div>
+                                <label for="thingType02" class="col-sm-2 control-label">物品类型</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="thingType02">
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <select class="form-control" id="thingName02">
+                                    </select>
+                                </div>
+                                <div class="col-sm-4" style="text-align: right;">
+                                    <button class="btn btn-info">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-primary">导出</button>
+                                </div>
+                            </div>
+                        </form>
+                        <table class="table">
+                            <thead>
+                            <th></th>
+                            <th>标题</th>
+                            <th>物品名称</th>
+                            <th>发布时间</th>
+                            <th>发布地点</th>
+                            <th>发布人</th>
+                            <th>联系方式</th>
+                            <th>物品状态</th>
+                            <th>备注</th>
+                            </thead>
+                            <tbody id="tab_allFind"></tbody>
+                        </table>
+                        <div id="paging1">
+                            <div class="first">首页</div>
+                            <div class="prev">上一页</div>
+                            <ul class="list"></ul>
+                            <div class="go">
+                                <input type="text" placeholder="Goto">
+                                <button>跳转</button>
+                            </div>
+                            <div class="next">下一页</div>
+                            <div class="last">末页</div>
+                        </div>
+                    </div>
+                	<div class="content">
+                        <form class="form-horizontal" role="form">
+                        	<div class="form-group">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th></th>
+                                      <th>标题</th>
+                                      <th>物品类型</th>
+                                      <th>物品名称</th>
+                                      <th>发布时间</th>
+                                      <th>预览图片</th>
+                                      <th>状态修改</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="tab_Lost"></tbody>
+                                </table>
+                            </div>
+                            <div id="paging">
+                                <div class="first">首页</div>
+                                <div class="prev">上一页</div>
+                                <ul class="list"></ul>
+                                <div class="go">
+                                  <input type="text" placeholder="Goto">
+                                  <button>跳转</button>
+                                </div>
+                                <div class="next">下一页</div>
+                                <div class="last">末页</div>
+                            </div>
+                            <br>
+                            <div class="form-group" style="text-align: center;">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
+                                  <button class="btn btn-warning">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                	<div class="content">
+                        <form class="form-horizontal" role="form">
+                        	<div class="form-group">
+                                <table class="table">
+
+                                  <thead>
+                                    <tr>
+                                      <th></th>
+                                      <th>标题</th>
+                                      <th>物品类型</th>
+                                      <th>物品名称</th>
+                                      <th>发布时间</th>
+                                      <th>预览图片</th>
+                                      <th>状态修改</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="tab_Find"></tbody>
+                                </table>
+                            </div>
+                            <div id="paging2">
+                                <div class="first">首页</div>
+                                <div class="prev">上一页</div>
+                                <ul class="list"></ul>
+                                <div class="go">
+                                  <input type="text" placeholder="Goto">
+                                  <button>跳转</button>
+                                </div>
+                                <div class="next">下一页</div>
+                                <div class="last">末页</div>
+                            </div>
+                            <br>
+                            <div class="form-group" style="text-align: center;">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
+                                  <button class="btn btn-warning">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="content">
+                        <form class="form-horizontal" role="form">
+                            <form action="" class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <div class=" col-sm-2">
+                                        <select class="form-control">
+                                            <option>校本部</option>
+                                            <option>白云校区</option>
+                                            <option>西校区</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-10" style="text-align: right;">
+                                        <button class="btn btn-info">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button class="btn btn-primary">导出</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="form-group">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>用户名</th>
+                                        <th>校区</th>
+                                        <th>学院</th>
+                                        <th>班级</th>
+                                        <th>联系方式</th>
+                                        <th>发布失物招领次数</th>
+                                        <th>发布寻物启示次数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="userTab_inform"></tbody>
+                                </table>
+                            </div>
+                            <div id="paging3">
+                                <div class="first">首页</div>
+                                <div class="prev">上一页</div>
+                                <ul class="list"></ul>
+                                <div class="go">
+                                    <input type="text" placeholder="Goto">
+                                    <button>跳转</button>
+                                </div>
+                                <div class="next">下一页</div>
+                                <div class="last">末页</div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="content" style="padding-top: 20px; padding-bottom: 40px;">
+                        <form class="form-horizontal" role="form">
+                            <br>
+                            <div class="form-group">
+                                <label for="location" class="col-sm-3 control-label">校区</label>
+                                <div class="col-sm-5" id="location" style="text-align: right;">
+                                    <select class="form-control">
+                                        <option>校本部</option>
+                                        <option>白云校区</option>
+                                        <option>西校区</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="loginName" class="col-sm-3 control-label">管理员登录名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="loginName" autocomplete="off" placeholder="请输入您的管理员登录名，由字母组成">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="managerName" class="col-sm-3 control-label">管理员名称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="managerName" autocomplete="off" placeholder="请输入您的管理员名称：校区 + 自律会 +名称">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-3 control-label">管理员密码</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="password" autocomplete="off" placeholder="请输入您的管理员密码，最少为6位数">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="repassword" class="col-sm-3 control-label">确认密码</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="repassword" autocomplete="off" placeholder="请输入您的管理员密码，最少为6位数">
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8">
+                                <button class="btn btn-success" style="margin-right: 100px;">提交</button>
+                                <button class="btn btn-warning">取消</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+                <br>
+                <br>
+            </div>        
+        </div>
+	</div>
+    <!-- 侧边栏分区 -->
+    <div class="side">
+        <div class="lostAndFound_log">
+            <img src="image/lostandfound.png" alt="">
+        </div>
+        <div class="focusOnzilvhui">
+            <div>关注自律会</div>
+            <div>
+                <img src="image/zilvhui_erweima/erweima1.jpg" alt="">
+                <p>校本部<br>自律会公众号</p>
+                <br>
+                <hr>
+                <img src="image/zilvhui_erweima/erweima2.jpg" alt="">
+                <p>四校区<br>自律会公众号</p>
+                <br>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- footer分区 -->
+<footer>
+	<div class="footer">	
+        <div class="container">
+            <ul>
+                <li><a href="#">免责声明</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">网站合作</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+    	<p>2018广东技术师范学院学生自律委员会校园失物信息共享平台</p>
+        <p>地址： &nbsp; 广东省广州市天河区中山大道西293号广东技术师范学院综合馆一楼失物招领值班处</p>
+        <p>举报邮箱：gjszlvswzl@163.com</p>
+        <p>提示: &nbsp;禁止发布任何违反国家法律、法规的言论与图片等内容</p>
+        <p>版权最终归网站设计者L&nbsp;L所有</p>
+    </div>
+</footer>
+<script src="js/cookie.js"></script>
+<script src="js/userInfo.js"></script>
+<script src="js/3public_findOwner.js"></script>
+<script src="js/1findOwnerdata.js"></script>
+<script src="js/2findThingdata.js"></script>
+<script src="js/9manager.js"></script>
+<script>
+$(document).ready(function(e) {
+	$(".hours").jtime({
+		format: "HH:mm"
+	});
+	$(".date").jtime({
+		format: "yyyy-MM-dd  星期W"
+	})
+	
+	$('label>input[type=radio]').click(function(e) {
+		if($(this).is(':checked')){
+			//alert($(this).is(':checked'));
+			$(this).siblings().removeAttr('checked');	
+			$(this).attr('checked','checked');
+		}
+    });
+});
+</script>
+</body>
+</html>

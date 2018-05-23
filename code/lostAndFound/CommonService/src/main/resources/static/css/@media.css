@@ -1,0 +1,69 @@
+@charset "utf-8";
+/* CSS Document */
+/* 判断手机端 */
+@media only screen and (max-width: 479px) {
+	.container{
+		width: 100%;
+	}
+	.time{	
+		width: 33%;
+	}
+	.sr-only,.form-group{
+		display: none;
+	}
+}
+
+/* 判断ipad端 */
+@media screen and (min-width: 480px) and (max-width: 767px){ 
+	.container{
+		width: 96%;
+	}
+	.time{	
+		width: 33%;
+	}
+	.sr-only,.form-group{
+		display: none;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 979px){  
+	.container{
+		width: 96%;
+	}
+	.time{	
+		width: 20%;
+	}
+	.sr-only{	
+		position: relative;
+		top:0.06rem;
+		width: 0.17rem;
+		height: 0.2rem;
+		padding-right: 0.05rem;
+		line-height: 0.2rem;
+	}
+	.form-psw{	
+		margin: 0 0.12rem;
+	}
+} 
+/* 判断PC端 */
+@media screen and (min-width:980px){
+	.container{
+		width: 80%;
+		height: 100%;
+		margin: 0 auto;
+	}
+	.time{	
+		width: 20%;
+	}
+	.sr-only{	
+		position: relative;
+		top:0.06rem;
+		width: 0.17rem;
+		height: 0.2rem;
+		padding-right: 0.05rem;
+		line-height: 0.2rem;
+	}
+	.form-psw{	
+		margin: 0 0.12rem;
+	}
+}
+

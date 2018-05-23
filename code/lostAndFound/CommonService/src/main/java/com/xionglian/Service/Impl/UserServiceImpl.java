@@ -1,6 +1,7 @@
 package com.xionglian.service.impl;
 
 
+import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.xionglian.common.util.Md5;
 import com.xionglian.mapper.UserMapper;
@@ -77,13 +78,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> selectAll() {
-        UserExample u = new UserExample();
-        return userMapper.selectByExample(u);
+    public long countAll() {
+        return userMapper.countByExample(null);
     }
 
     @Override
-    public int upateUserByPrimaryKey(User user) {
+    public List<User> selectAll(Integer currentPage, Integer pageSize){
+        PageHelper.startPage(currentPage,pageSize);
+        return userMapper.selectByExample(null);
+    }
+
+    @Override
+    public int upateUserByPrimaryKey(User user) throws Exception{
+        String password = Md5.getMD5Str(user.getPassword());
+        user.setPassword(password);
         return userMapper.updateByPrimaryKeySelective(user);
     }
 

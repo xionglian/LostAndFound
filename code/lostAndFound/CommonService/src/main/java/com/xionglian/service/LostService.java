@@ -20,8 +20,12 @@ public interface LostService {
 
     public List getAllWithUser(Integer currentPage, Integer pageSize);
 
+    public List getAllWithUser(Integer currentPage, Integer pageSize,Integer userId);
+
     public List<Lost> getByCondition(String address,String keyword);
 
     public long countAll();
+
+    public long countAll(Integer userId);
 
 }

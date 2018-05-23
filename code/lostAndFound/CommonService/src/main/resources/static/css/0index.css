@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{	
+	color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.list-group-item.active  span, .list-group-item.active:focus  span, .list-group-item.active:hover span{	
+	position: relative;
+	z-index:1;
+	cursor: pointer;
+}
+
+.lostList{	
+	overflow: hidden;
+}
+.lostListHead{	
+	margin-right: 5%;
+	width: 20%;
+	text-align: center;
+	border-right: 1px solid #555;
+}
+.lostListDesc{	
+	width: 75%;
+	line-height: 0.2rem;
+}

@@ -38,8 +38,13 @@ public class LostServiceImpl implements LostService{
     }
 
     @Override
-    public List
-    getAllWithUser(Integer currentPage, Integer pageSize) {
+    public List<Lost> getAllWithUser(Integer currentPage, Integer pageSize,Integer userId) {
+        PageHelper.startPage(currentPage,pageSize);
+        return lostMapper.selectAllWithUserByUserId(userId);
+    }
+
+    @Override
+    public List getAllWithUser(Integer currentPage, Integer pageSize) {
         PageHelper.startPage(currentPage,pageSize);
         return lostMapper.selectAllWithUser();
 
@@ -66,5 +71,12 @@ public class LostServiceImpl implements LostService{
     @Override
     public long countAll() {
         return lostMapper.countByExample(null);
+    }
+
+    @Override
+    public long countAll(Integer userId) {
+        LostExample example = new LostExample();
+        example.createCriteria().andReleaseUserIdEqualTo(userId);
+        return lostMapper.countByExample(example);
     }
 }

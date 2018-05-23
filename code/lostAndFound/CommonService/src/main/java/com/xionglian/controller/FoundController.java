@@ -80,6 +80,36 @@ public class FoundController {
         }
     }
     /**
+     * 分页获取失物招领
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "getAllByUser" ,method = RequestMethod.GET)
+    public ResMessage getAllByUser(HttpServletRequest request,HttpSession session){
+        ResMessage resMessage = new ResMessage();
+        try {
+            Integer currentPage = request.getParameter("currentPage") == null ? 1:Integer.parseInt(request.getParameter("currentPage"));
+            Integer pageSize = request.getParameter("pageSize") == null ? 5:Integer.parseInt(request.getParameter("pageSize"));
+            User user = (User)session.getAttribute("user");
+            if(null == user){
+                resMessage.setResult("fail");
+                resMessage.setData("用户未登录");
+                return  resMessage;
+            }
+            resMessage.setResult("success");
+            HashMap map = new HashMap();
+            map.put("count",foundService.countAll(user.getId()));
+            map.put("foundList",foundService.getAllWithUser(currentPage,pageSize,user.getId()));
+            resMessage.setData(map);
+        } catch (Exception e) {
+            resMessage.setResult("fail");
+            resMessage.setData(e);
+            e.printStackTrace();
+        }finally {
+            return resMessage;
+        }
+    }
+    /**
      * 修改状态
      * @param found
      * @return

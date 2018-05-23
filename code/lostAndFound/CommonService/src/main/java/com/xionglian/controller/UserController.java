@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 /**
  * Created by  xionglian on 2018-05-08.
@@ -169,11 +170,16 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "getAll" ,method = RequestMethod.GET)
-    public ResMessage getAll(){
+    public ResMessage getAll(HttpServletRequest request){
         ResMessage resMessage = new ResMessage();
         try {
+            Integer currentPage = request.getParameter("currentPage") == null ? 1:Integer.parseInt(request.getParameter("currentPage"));
+            Integer pageSize = request.getParameter("pageSize") == null ? 5:Integer.parseInt(request.getParameter("pageSize"));
            resMessage.setResult("success");
-           resMessage.setData(userService.selectAll());
+            HashMap map = new HashMap();
+            map.put("count",userService.countAll());
+            map.put("foundList",userService.selectAll(currentPage,pageSize));
+            resMessage.setData(map);
         } catch (Exception e) {
             resMessage.setResult("fail");
             resMessage.setData(e);

@@ -20,6 +20,8 @@ public interface LostMapper {
 
     List selectAllWithUser();
 
+    List selectAllWithUserByUserId(Integer userId);
+
     Lost selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Lost record, @Param("example") LostExample example);

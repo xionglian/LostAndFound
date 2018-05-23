@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+.introduce{	
+	padding-left: 200px;
+	box-sizing: border-box;
+	position: relative;
+}
+.introduce:before{	
+	content: "";
+	width: 160px;
+	height: 160px;
+	position: absolute;
+	left:10px;
+	top:5px;
+	background: url(../image/zilvhui.png) no-repeat;
+	background-size: contain;
+}
+.list-group-item{	
+	text-indent: 2em;
+}
+.aside_navbar{	
+	width: 16%;
+}
+.aside_navbar li{
+	width:100%;
+	text-indent: 0em;
+	height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #2b2b2b;
+	text-align: left;
+	cursor: pointer;
+}
+.aside_navbar li.act{	
+	font-weight: bold;
+	color: #000;
+}
+.aside_navbar li>button{	
+	border: none;
+	background: none;
+}
+.aside_content{	
+	width: 81%;
+	padding-left: 3%;
+	border-left: 1px solid #2b2b2b;
+}
+.aside_content>.content{	
+	display: none;
+	text-indent: 0em;
+}
+.aside_content>.content a{	
+	color: red;
+}
+.aside_content>.content.current
+{	
+	display: block;
+}
+table,thead th,tbody ,tr,td{	
+	text-align: center;
+	border: 1px solid #ddd;
+	
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{	
+	vertical-align: middle;
+}
+.title{	
+	width: 120px;
+	overflow: hidden;   
+    white-space: nowrap;   
+    text-overflow: ellipsis;  
+}
+.image{	
+	width: 150px;
+	text-align: center;
+}
+.image>img{	
+	width: 80%;
+}
+input[type=radio]{	
+	width: 16px;
+	height: 16px;
+	position: relative;
+	top: 3px;
+}
+.status label{	
+	line-height: 30px;
+}

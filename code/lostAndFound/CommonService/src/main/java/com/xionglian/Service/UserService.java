@@ -38,8 +38,10 @@ public interface UserService {
 
     public int logout(int userId);
 
-    public List<User> selectAll();
+    public long countAll();
 
-    public int upateUserByPrimaryKey(User user);
+    public List<User> selectAll(Integer currentPage, Integer pageSize);
+
+    public int upateUserByPrimaryKey (User user)throws Exception;
 
 }

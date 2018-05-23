@@ -89,14 +89,31 @@
   <!-- 新增-->
   <select id="selectAllWithUser" resultType="map">
 select
-lost.id,title ,release_user_id,confirm_found_user_id,link_name,link_phone,good_type
-,good_name,lost_address,lost_address_detail,lost_time,lost.create_time,description_detail,
-key_word01,key_word02,key_word03,state,confirm_time,picture_url,click_num
-,login_name,username,tel,mail,sex,role,user_img,school_location,second_school,user_class
+lost.id,title ,release_user_id as releaseUserId,confirm_found_user_id as confirmFoundUserId,
+link_name as linkName,link_phone as linkPhone,good_type as goodType
+,good_name as goodName,lost_address as lostAddress,lost_address_detail as lostAddressDetail,lost_time as lostTime,lost.create_time as createTime,description_detail as descriptionDetail,
+key_word01 as keyWord01,key_word02 as keyWord02,key_word03 keyWord03,state,confirm_time as confirmTime,picture_url as pictureUrl,click_num
+ as clickNum,login_name as loginName,username,tel,mail,sex,role,user_img as userImg,school_location as schoolLocation,second_school as secondSchool,user_class as userClass
 
 from lost INNER JOIN
 `user`
 ON lost.release_user_id = `user`.id
+ORDER BY lost.create_time desc
+  </select>
+  <!-- 新增-->
+  <select id="selectAllWithUserByUserId" parameterType="Integer" resultType="map">
+    select
+    lost.id,title ,release_user_id as releaseUserId,confirm_found_user_id as confirmFoundUserId,
+    link_name as linkName,link_phone as linkPhone,good_type as goodType
+    ,good_name as goodName,lost_address as lostAddress,lost_address_detail as lostAddressDetail,lost_time as lostTime,lost.create_time as createTime,description_detail as descriptionDetail,
+    key_word01 as keyWord01,key_word02 as keyWord02,key_word03 keyWord03,state,confirm_time as confirmTime,picture_url as pictureUrl,click_num
+    as clickNum,login_name as loginName,username,tel,mail,sex,role,user_img as userImg,school_location as schoolLocation,second_school as secondSchool,user_class as userClass
+
+    from lost INNER JOIN
+    `user`
+    ON lost.release_user_id = `user`.id
+     where `user`.id =#{_parameter}
+     ORDER BY lost.create_time desc
   </select>
   <select id="selectByExample" parameterType="com.xionglian.model.LostExample" resultMap="BaseResultMap">
     select
