@@ -48,10 +48,10 @@ function findOwnerList(n){
                 var btns = document.getElementById(num);
                 //console.log(state);
                 if(state === 2){
-                    btns.innerHTML = "寻找成功";
+                    btns.innerHTML = "招领成功";
                     btns.setAttribute("class","btn btn-lg btn-warning");
                 }else if(state === 1){
-                    btns.innerHTML = "寻找中…";
+                    btns.innerHTML = "招领中…";
                     btns.setAttribute("class","btn btn-lg btn-danger");
                 }
             }

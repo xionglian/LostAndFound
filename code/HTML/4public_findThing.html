@@ -79,7 +79,7 @@
                 </h4>
             </div>
             <div class="list-group-item animated fadeInLeft">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="uploadForm">
                     <div class="form-group">
                         <label for="title" class="col-sm-2 control-label"><span class="start">*</span>标题</label>
                         <div class="col-sm-6">
@@ -170,7 +170,7 @@
                     <div class="form-group">
                         <label for="inputfile" class="col-sm-2 control-label"><span class="start">*</span>物品照片</label>
                         <div class="col-sm-6">
-                            <input type="file" id="inputfile">
+                            <input type="file" id="inputfile" name="uploadFile">
                         </div>
                      </div> 
                 </form>
@@ -234,47 +234,40 @@ $(document).ready(function(e) {
 		format: "yyyy-MM-dd  星期W"
 	})
 });
-function publicFindThing(){
-    var $title = $('#title').val();
-    var $thingType = $('#thingsType').val();
-    var $thingName = $('#thingName').val();
-    var $keyWord01 = $('#keyWord01').val();
-    var $keyWord02 = $('#keyWord02').val();
-    var $keyWord03 = $('#keyWord03').val();
-    var $location = $('#location').val();
-    var $locationDtail = $('#location_detail').val();
-    var $lostTime = $('#pickUpDate').val();
-    var $contactOne = $('#contactOne').val();
-    var $contactWay = $('#contactWay').val();
-    var $thingImg = $('#inputfile');
-    var $detail = $('#detail').val();
+var $title,$thingType,$releaseUserId,$confirmFoundUserId,$thingName,$keyWord01,$keyWord02,$keyWord03,$location,$locationDtail,$lostTime,$contactOne,$contactWay,$thingImg,$detail;
 
+function publicFindThing(){
+    $releaseUserId = userInfoRes.id;
+    $confirmFoundUserId="";
+    $title = $('#title').val();
+    $thingType = $('#thingType').val();
+    $thingName = $('#thingName').val();
+    $keyWord01 = $('#keyWord01').val();
+    $keyWord02 = $('#keyWord02').val();
+    $keyWord03 = $('#keyWord03').val();
+    $location = $('#location').val();
+    $locationDtail = $('#location_detail').val();
+    $lostTime = $('#pickUpDate').val()+'.123Z';
+    $contactOne = $('#contactOne').val();
+    $contactWay = $('#contacWay').val();
+    $thingImg = $('#inputfile').val();
+    $detail = $('#detail').val();
+
+    //上传图片
+    var formData = new FormData(document.getElementById("uploadForm"));
+    formData.append("uploadFile", $thingImg);
     $.ajax({
-        type:'post',
-        url:'http://119.29.102.236/lost/add',
+        type: 'post',
         xhrFields: {
             withCredentials: true
         },
         crossDomain: true,
-        async:true,
-        data:JSON.stringify({
-            "title":$title,
-            "goodType":$thingType,
-            "goodName":$thingName,
-            "keyWord01":$keyWord01,
-            "keyWord02":$keyWord02,
-            "keyWord03":$keyWord03,
-            "lostAddress":$location,
-            "lostAddressDetail":$locationDtail,
-            "lostTime":$lostTime,
-            "link_name":$contactOne,
-            "linkPhone":$contactWay,
-            "descriptionDetail":$detail,
-            "thingImg":$thingImg
-        }),
-        dataType:'json',
-        contentType:'application/json; charset=utf-8',
-        /*beforeSend:function(){
+        url: "http://119.29.102.236/File/uploadPhoto",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        beforeSend:function(){
             if(!$title){
                 alert('发布信息的标题不能为空，请输入标题');
                 return false;
@@ -287,7 +280,7 @@ function publicFindThing(){
                 alert('请填写丢失失物时的地点');
                 return false;
             }
-            if(!$pickUpTime){
+            if(!$lostTime){
                 alert('丢失失物的时间不能为空，请填写“丢失时间”。');
                 return false;
             }
@@ -304,22 +297,62 @@ function publicFindThing(){
                 alert('物品的具体描述不能为空，请填写失物的相关信息');
                 return false;
             }
-        },*/
-        success:function(data){
-            //alert(JSON.stringify(data.result));
-            var res = data.result;
-            var id = data.data;
-            alert(JSON.stringify(data));
-            if(res === "success"){
-                alert('发布寻物启事成功！');
-                location.href = '2findThing.html';
-            }else if(res === "fail"){
-                alert(id);
+        },
+        success: function(data){
+            //alert(JSON.stringify(data));
+            if(data.result == 'success'){
+                $thingImg = data.data;
+                realPublicLost();
             }
         }
     })
-}
 
+}
+//发布寻物启事
+    function realPublicLost(){
+        $.ajax({
+            type:'post',
+            url:'http://119.29.102.236/lost/add',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            async:true,
+            data:JSON.stringify({
+                "title": $title,
+                "releaseUserId": $releaseUserId,
+                "confirmFoundUserId": 2,
+                "linkName": $contactOne,
+                "linkPhone": $contactWay,
+                "goodType": $thingType,
+                "goodName": $thingName,
+                "lostAddress": $location,
+                "lostAddressDetail": $locationDtail,
+                "lostTime": $lostTime,
+                "descriptionDetail": $detail,
+                "keyWord01": $keyWord01,
+                "keyWord02": $keyWord02,
+                "keyWord03": $keyWord03,
+                "state": "1",
+                "pictureUrl": $thingImg
+            }),
+            dataType:'json',
+            contentType:'application/json; charset=utf-8',
+            success:function(data){
+                //alert(JSON.stringify(data.result));
+                var res = data.result;
+                var id = data.data;
+                //alert(JSON.stringify(data));
+                if(res === "success"){
+                    alert('发布寻物启事成功！');
+                    location.href = '2findThings.html';
+                }else if(res === "fail"){
+                    alert(id);
+                }
+            }
+        })
+
+    }
 </script>
 </body>
 </html>

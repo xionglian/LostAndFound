@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+</head>
+<body>
+<!--<form method="POST" enctype="multipart/form-data" >
+    图片<input type="file" name="uploadFile" id="imgURL"><br/>
+</form>
+<br>
+<button onclick="submit();">提交</button>
+<br><br>
+<script>
+    var $userImg = $('#imgURL').val();
+    function submit(){
+        $.ajax({
+            type:'post',
+            url:'http://119.29.102.236/File/uploadPhoto',
+            dataType:'json',
+            data:{
+                'uploadFile':$userImg
+            },
+            dataType:'json',
+            contentType:'application/json; charset=utf-8',
+            success:function(data){
+                alert(JSON.stringify(data));
+                // if(data.result == 'success'){
+                //     $userImg = data.data;
+                //     alert($userImg);
+                // }else{
+                //     alert(data.data);
+                // }
+            }
+        })
+    }
+</script>-->
+<form id="uploadForm" enctype="multipart/form-data">
+    <input id="file" type="file"/>
+    <button id="upload" type="button">upload</button>
+</form>
+<script type="text/javascript">
+    var formData = new FormData($('#uploadForm')[0]);
+    $.ajax({
+        type: 'post',
+        url: "http://119.29.102.236/File/uploadPhoto",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+    }).success(function (data) {
+        alert(JSON.stringify(data));
+    }).error(function () {
+        alert("上传失败");
+    });
+
+</script>
+</body>
+</html>

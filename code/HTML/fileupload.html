@@ -1,0 +1,33 @@
+<!DOCTYPE html>  
+<html>  
+<head lang="en">  
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>  
+    <title></title>  
+</head>  
+<body>  
+<form id="uploadForm" enctype="multipart/form-data">  
+    文件:<input id="file" type="file" name="uploadFile"/>  
+</form>  
+<button id="upload">上传文件</button>  
+</body>  
+<script type="text/javascript">  
+    $(function () {  
+        $("#upload").click(function () {  
+            var formData = new FormData($('#uploadForm')[0]);  
+            $.ajax({  
+                type: 'post',  
+                url: "http://119.29.102.236/File/uploadPhoto",  
+                data: formData,  
+                cache: false,  
+                processData: false,  
+                contentType: false,  
+            }).success(function (data) {  
+                alert(JSON.stringify(data));  
+            }).error(function () {  
+                alert("上传失败");  
+            });  
+        });  
+    });  
+</script>  
+</html>  

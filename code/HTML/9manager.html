@@ -106,31 +106,22 @@
                 	<div class="content">
                     	<form action="" class="form-horizontal" role="form">
                             <div class="form-group">
-                            	<div class=" col-sm-2">
-                                    <select class="form-control">
+                            	<div class=" col-sm-4">
+                                    <select id="schoolLocation01" class="form-control">
                                         <option>校本部</option>
                                         <option>白云校区</option>
                                         <option>西校区</option>
                                     </select>
                                 </div>
-                                <label for="thingType01" class="col-sm-2 control-label">物品类型</label>
-                                <div class="col-sm-2">
-                                    <select class="form-control" id="thingType01">
-                                    </select>
-                                </div>
-                                <div class="col-sm-2">
-                                    <select class="form-control" id="thingName">
-                                    </select>
-                                </div>
-                                <div class="col-sm-4" style="text-align: right;">
-                                	<button class="btn btn-info">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                	<button class="btn btn-primary">导出</button>
+                                <div class="col-sm-8" style="text-align: right;">
+                                    <div class="btn btn-info" onclick="search01();">搜索</div>
+                                    <!--<div class="btn btn-primary" >导出</div>&nbsp;&nbsp;-->
                                 </div>
                             </div>
                         </form>
                         <table class="table">
                         	<thead>
-                            	<th style="width: 25px;"></th>
+                            	<th style="width: 40px;"></th>
                             	<th>标题</th>
                             	<th>物品名称</th>
                             	<th>发布时间</th>
@@ -153,31 +144,22 @@
                     <div class="content">
                         <form action="" class="form-horizontal" role="form">
                             <div class="form-group">
-                                <div class=" col-sm-2">
-                                    <select class="form-control">
+                                <div class=" col-sm-4">
+                                    <select id="schoolLocation02" class="form-control">
                                         <option>校本部</option>
                                         <option>白云校区</option>
                                         <option>西校区</option>
                                     </select>
                                 </div>
-                                <label for="thingType02" class="col-sm-2 control-label">物品类型</label>
-                                <div class="col-sm-2">
-                                    <select class="form-control" id="thingType02">
-                                    </select>
-                                </div>
-                                <div class="col-sm-2">
-                                    <select class="form-control" id="thingName02">
-                                    </select>
-                                </div>
-                                <div class="col-sm-4" style="text-align: right;">
-                                    <button class="btn btn-info">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button class="btn btn-primary">导出</button>
+                                <div class="col-sm-8" style="text-align: right;">
+                                    <div class="btn btn-info" onclick="search02()">搜索</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <!--<div class="btn btn-primary">导出</div>-->
                                 </div>
                             </div>
                         </form>
                         <table class="table">
                             <thead>
-                            <th style="width: 25px;"></th>
+                            <th style="width: 40px;"></th>
                             <th>标题</th>
                             <th>物品名称</th>
                             <th>发布时间</th>
@@ -202,18 +184,20 @@
                         </div>
                     </div>
                 	<div class="content">
+                        <br><br>
                         <form class="form-horizontal" role="form">
                         	<div class="form-group">
                                 <table class="table">
                                   <thead>
                                     <tr>
-                                      <th style="width: 25px;"></th>
-                                      <th>标题</th>
-                                      <th>物品类型</th>
-                                      <th>物品名称</th>
-                                      <th>发布时间</th>
-                                      <th>预览图片</th>
-                                      <th>状态修改</th>
+                                        <th style="width: 40px;"></th>
+                                        <th>标题</th>
+                                        <th style="width: 100px;">物品类型</th>
+                                        <th style="width: 100px;">物品名称</th>
+                                        <th>发布时间</th>
+                                        <th>预览图片</th>
+                                        <th style="width: 100px;">状态修改</th>
+                                        <th style="width: 100px;">备注</th>
                                     </tr>
                                   </thead>
                                   <tbody id="tab_Lost"></tbody>
@@ -226,12 +210,6 @@
                                 <div class="last">末页</div>
                             </div>
                             <br>
-                            <div class="form-group" style="text-align: center;">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
-                                  <button class="btn btn-warning">取消</button>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 	<div class="content">
@@ -240,13 +218,14 @@
                                 <table class="table">
                                   <thead>
                                     <tr>
-                                      <th style="width: 25px;"></th>
-                                      <th>标题</th>
-                                      <th>物品类型</th>
-                                      <th>物品名称</th>
-                                      <th>发布时间</th>
-                                      <th>预览图片</th>
-                                      <th>状态修改</th>
+                                        <th style="width: 40px;"></th>
+                                        <th>标题</th>
+                                        <th>物品类型</th>
+                                        <th>物品名称</th>
+                                        <th>发布时间</th>
+                                        <th>预览图片</th>
+                                        <th>状态修改</th>
+                                        <th>备注</th>
                                     </tr>
                                   </thead>
                                   <tbody id="tab_Find"></tbody>
@@ -259,37 +238,31 @@
                                 <div class="last">末页</div>
                             </div>
                             <br>
-                            <div class="form-group" style="text-align: center;">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
-                                  <button class="btn btn-warning">取消</button>
-                                </div>
-                            </div>
                         </form>
                     </div>
                     <div class="content">
                         <form class="form-horizontal" role="form">
                             <form action="" class="form-horizontal" role="form">
                                 <div class="form-group">
-                                    <div class=" col-sm-2">
-                                        <select class="form-control">
-                                            <option>校本部</option>
-                                            <option>白云校区</option>
-                                            <option>西校区</option>
-                                        </select>
+                                    <div class=" col-sm-4">
+                                        <!--<select id="schoolLocation03" class="form-control">-->
+                                            <!--<option>校本部</option>-->
+                                            <!--<option>白云校区</option>-->
+                                            <!--<option>西校区</option>-->
+                                        <!--</select>-->
                                     </div>
-                                    <div class="col-sm-10" style="text-align: right;">
-                                        <button class="btn btn-info">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button class="btn btn-primary">导出</button>
+                                    <div class="col-sm-8" style="text-align: right;">
+                                        <!--<div class="btn btn-info" onclick="search03();">搜索</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <div class="btn btn-primary"">导出</div>-->
                                     </div>
                                 </div>
                             </form>
 
                             <div class="form-group">
-                                <table class="table">
+                                <table id="userTable" class="table">
                                     <thead>
                                     <tr>
-                                        <th style="width: 25px;"></th>
+                                        <th style="width: 40px;"></th>
                                         <th>用户名</th>
                                         <th>校区</th>
                                         <th>学院</th>
@@ -311,12 +284,12 @@
                         </form>
                     </div>
                     <div class="content" style="padding-top: 20px; padding-bottom: 40px;">
-                        <form class="form-horizontal" role="form">
+                        <form id="uploadForm" class="form-horizontal" role="form">
                             <br>
                             <div class="form-group">
                                 <label for="location" class="col-sm-3 control-label">校区</label>
                                 <div class="col-sm-5" id="location" style="text-align: right;">
-                                    <select class="form-control">
+                                    <select id="schoolLocation" class="form-control">
                                         <option>校本部</option>
                                         <option>白云校区</option>
                                         <option>西校区</option>
@@ -351,11 +324,26 @@
                                     <input type="password" class="form-control" id="repassword" autocomplete="off" placeholder="请输入您的管理员密码，最少为6位数">
                                 </div>
                             </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="userImg" class="col-sm-3 control-label">管理员头像</label>
+                                <div  class="col-sm-8">
+                                    <input type="file" id="userImg" name="uploadFile">
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="form-group">
+                                <label for="linkPhone" class="col-sm-3 control-label">管理员联系方式</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="linkPhone" autocomplete="off" placeholder="请输入您的联系方式">
+                                </div>
+                            </div>
                         </form>
                         <br>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
-                                <button class="btn btn-success" style="margin-right: 100px;">提交</button>
+                                <button class="btn btn-success" style="margin-right: 100px;" onclick="submit()">提交</button>
                                 <button class="btn btn-warning">取消</button>
                             </div>
                         </div>
@@ -429,6 +417,7 @@ $(document).ready(function(e) {
 			$(this).attr('checked','checked');
 		}
     });
+
 });
 </script>
 </body>

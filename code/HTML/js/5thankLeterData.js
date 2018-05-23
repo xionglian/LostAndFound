@@ -16,10 +16,9 @@ function thinkLetterDatas(n) {
         //res = JSON.stringify(data.result);
         var res = data.result;
         var resData = data.data;
-        //alert(JSON.stringify(resData));
+        // alert(JSON.stringify(resData));
         if (res === "success") {
             thanksLetterData = resData;
-            //alert(findOwner);
             createDiv(pageNumber);
         }
         else if(res === "fail"){

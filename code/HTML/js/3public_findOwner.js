@@ -63,48 +63,39 @@ $(document).ready(function(e) {
     });
 });
 
+var $title,$thingType,$releaseUserId,$confirmFoundUserId,$thingName,$keyWord01,$keyWord02,$keyWord03,$location,$locationDtail,$pickUpOne,$pickUpTime,$contactOne,$contactWay,$thingImg,$detail;
 function publicFindOwner(){
-    var $title = $('#title').val();
-    var $thingType = $('#thingsType').val();
-    var $thingName = $('#thingName').val();
-    var $keyWord01 = $('#keyWord01').val();
-    var $keyWord02 = $('#keyWord02').val();
-    var $keyWord03 = $('#keyWord03').val();
-    var $location = $('#location').val();
-    var $locationDtail = $('#location_detail').val();
-    var $pickUpOne = $('#erjixueyuan').val()+$('#class').val()+$('#name').val();
-    var $pickUpTime = $('#pickUpDate').val();
-    var $contactOne = $('#contactOne').val();
-    var $contactWay = $('#contactWay').val();
-    var $thingImg = $('#inputfile');
-    var $detail = $('#detail').val();
+    $releaseUserId = userInfoRes.id;
+    $confirmFoundUserId="";
+    $title = $('#title').val();
+    $thingType = $('#thingType').val();
+    $thingName = $('#thingName').val();
+    $keyWord01 = $('#keyWord01').val();
+    $keyWord02 = $('#keyWord02').val();
+    $keyWord03 = $('#keyWord03').val();
+    $location = $('#location').val();
+    $locationDtail = $('#location_detail').val();
+    $pickUpOne = $('#erjixueyuan').val()+$('#class').val()+$('#name').val();
+    $pickUpTime = $('#pickUpDate').val()+'.123Z';
+    $contactOne = $('#contactOne').val();
+    $contactWay = $('#contactWay').val();
+    $thingImg = $('#inputfile').val();
+    $detail = $('#detail').val();
 
+    //先上传图片
+    var formData = new FormData(document.getElementById("uploadForm"));
+    formData.append("uploadFile", $thingImg);
     $.ajax({
-        type:'post',
-        url:'http://119.29.102.236/found/add',
+        type: 'post',
         xhrFields: {
             withCredentials: true
         },
         crossDomain: true,
-        async:true,
-        data:JSON.stringify({
-            "title":$title,
-            "goodType":$thingType,
-            "goodName":$thingName,
-            "keyWord01":$keyWord01,
-            "keyWord02":$keyWord02,
-            "keyWord03":$keyWord03,
-            "foundAddress":$location,
-            "foundAddressDetail":$locationDtail,
-            "findPerson":$pickUpOne,
-            "foundTime":$pickUpTime,
-            "link_name":$contactOne,
-            "linkPhone":$contactWay,
-            "descriptionDetail":$detail,
-            "thingImg":$thingImg
-        }),
-        dataType:'json',
-        contentType:'application/json; charset=utf-8',
+        url: "http://119.29.102.236/File/uploadPhoto",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
         beforeSend:function(){
             if(!$title){
                 alert('发布信息的标题不能为空，请输入标题');
@@ -140,18 +131,53 @@ function publicFindOwner(){
                 return false;
             }
         },
-        success:function(data){
-            //alert(JSON.stringify(data.result));
-            var res = data.result;
-            var id = data.data;
-            alert(res);
-            alert(id);
-            if(res === "success"){
-                alert('发布失物招领信息成功，失物招领的id值为：'+id);
-                location.href = '1findOwner.html';
-            }else if(res === "fail"){
-                alert(id);
+        success: function(data){
+            // alert(JSON.stringify(data));
+            if(data.result == 'success'){
+                $thingImg = data.data;
+                realPublicFound();
             }
         }
     })
+}
+//发布失物招领
+function realPublicFound(){
+    $.ajax({
+        type:'post',
+        url:'http://119.29.102.236/found/add',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        async:true,
+        data:JSON.stringify({
+                "title":$title,
+                "releaseUserId":$releaseUserId,
+                "confirmFoundUserId":2,
+                "linkName":$contactOne,
+                "linkPhone":$contactWay,
+                "goodType":$thingType,
+                "goodName":$thingName,
+                "foundAddress":$location,
+                "foundAddressDetail":$locationDtail,
+                "foundTime":$pickUpTime,
+                "descriptionDetail":$detail,
+                "keyWord01":$keyWord01,
+                "keyWord02":$keyWord02,
+                "keyWord03":$keyWord03,
+                "state":"1",
+                "pictureUrl":$thingImg
+        }),
+        dataType:'json',
+        contentType:'application/json; charset=utf-8',
+        success:function(data){
+            if(data.result === "success"){
+                alert('发布失物招领信息成功!');
+                location.href = '1findOwner.html';
+            }else if(data.result === "fail"){
+                alert(data.data);
+            }
+        }
+    })
+
 }

@@ -6,45 +6,35 @@ $(document).ready(function() {
 		
 	}
 });
+var $loginname,$username,$psw,$repsw,$userImg,$role,$sex,$schoolLocation,$secondSchool,$class,$contactWay,$qq,$eMail,$server,$submit ;
 
-var res;
 function submit(){
+    $loginname = $('#loginname').val();
+    $username = $('#username').val();
+    $psw = $('#password').val();
+    $repsw = $('#repassword').val();
+    $userImg = $('#userImg').val();
+    $role = $('input:radio[name="role"]:checked').val();
+    $sex = $('input:radio[name="male"]:checked').val();
+    $schoolLocation = $('#schoolLocation').val();
+    $secondSchool = $('#erjixueyuan').val();
+    $class = $('#classes').val();
+    $contactWay = $('#contact').val();
+    $qq = $('#qq').val();
+    $eMail = $('#email').val();
+    $server = $('#server');
     //alert('提交');
-    var $loginname = $('#loginname').val();
-    var $username = $('#username').val();
-    var $psw = $('#password').val();
-    var $repsw = $('#repassword').val();
-    var $userImg = $('#userImg').val();
-    var $role = $('input:radio[name="role"]:checked').val();
-    var $sex = $('input:radio[name="male"]:checked').val();
-    var $schoolLocation = $('#schoolLocation').val();
-    var $secondSchool = $('#erjixueyuan').val();
-    var $class = $('#classes').val();
-    var $contactWay = $('#contact').val();
-    var $qq = $('#qq').val();
-    var $eMail = $('#email').val();
-    var $server = $('#server');
-    var $submit = $('#submit');
-    //alert($loginname+$username+$psw+$repsw+$userImg+$role+$sex+$schoolLocation+$secondSchool+$class+$contactWay)
+    //先上传图片
+    //var formData = new FormData($('#uploadForm')[4]);
+    var formData = new FormData(document.getElementById("uploadForm"));
+    formData.append("uploadFile", $userImg);
     $.ajax({
-        type:'post',
-        url:'http://119.29.102.236/user/register',
-        data:JSON.stringify({
-            "loginName":$loginname,
-            "username":$username,
-            "password":$psw,
-            "role":$role,
-            "sex":$sex,
-            "schoolLocation":$schoolLocation,
-            "secondSchool":$secondSchool,
-            "userClass":$class,
-            "tel":$contactWay,
-            "qq":$qq,
-            "mail":$eMail,
-            "userImg":$userImg
-        }),
-        dataType:'json',
-        contentType:'application/json; charset=utf-8',
+        type: 'post',
+        url: "http://119.29.102.236/File/uploadPhoto",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
         beforeSend:function(){
 //                        判断用户名是否为空
             if(!$loginname){
@@ -87,46 +77,53 @@ function submit(){
                 return false;
             }
             //服务协议是否打钩
-            if(!$server.is(':checked')){
+            if(!($server.is(':checked'))){
                 alert('请仔细阅读用户协议，并勾选“我已阅读并完全同意服务协议”');
                 return false;
             }
-//                        判断$submit按钮是否有disabled属性，如果没有添加属性，如果有结束执行
-            if($submit.hasClass('disabled')){
-                return false;
-            }
-            $submit.val('正在注册').addClass('disabled');
         },
+        success: function(data){
+            if(data.result == 'success'){
+                $userImg = data.data
+                realSubmit();
+            }
+        }
+    })
+};
+
+//再发布
+function realSubmit(){
+    $.ajax({
+        type:'post',
+        url:'http://119.29.102.236/user/register',
+        data:JSON.stringify({
+            "loginName":$loginname,
+            "username":$username,
+            "password":$psw,
+            "role":$role,
+            "sex":$sex,
+            "schoolLocation":$schoolLocation,
+            "secondSchool":$secondSchool,
+            "userClass":$class,
+            "tel":$contactWay,
+            "qq":$qq,
+            "mail":$eMail,
+            "userImg":$userImg
+        }),
+        dataType:'json',
+        contentType:'application/json; charset=utf-8',
         success:function(data){
-            alert(JSON.stringify(data));
+            //alert(JSON.stringify(data));
             if(data.result == "success"){
-                alert(02)
                 if(data.data == true){
                     alert('注册成功，欢迎您成为我们校园失物信息共享平台的一员！请开始您的参观之旅吧');
                     location.href = '02denglu.html';
                 }else{
                     alert(data.data)
                 }
-            }else if(res === "fail"){
+            }else if(data.result === "fail"){
                 alert(data.data)
             }
-        },
-        error:function(){
-            alert('请求不成功');
         }
     })
-    /*//成功后的处理函数,res为服务器返回的数据
-    .done(function(res) {
-        alert("success");
-    })
-    //失败后的处理函数
-    .fail(function(res) {
-        alert("error");
-        //console.log(res);
-    })
-    //结束后的处理函数，不管成功失败都执行
-    .always(function(res) {
-        alert("complete");
-    });*/
-};
-
+}

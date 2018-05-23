@@ -176,31 +176,26 @@
                                 <table class="table">
                                   <thead>
                                     <tr>
-                                      <th></th>
+                                      <th style="width: 30px;"></th>
                                       <th>标题</th>
                                       <th>物品类型</th>
                                       <th>物品名称</th>
                                       <th>发布时间</th>
                                       <th>预览图片</th>
                                       <th>状态修改</th>
+                                        <th>备注</th>
                                     </tr>
                                   </thead>
                                   <tbody id="tab_Lost"></tbody>
                                 </table>
                             </div>
                             <div id="paging">
-                                <div class="first">首页</div>
+                                <div class="first" onclick="mypublicLost(1)">首页</div>
                                 <div class="prev">上一页</div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>
                             <br>
-                            <div class="form-group" style="text-align: center;">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
-                                  <button class="btn btn-warning">取消</button>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 	<div class="content">
@@ -209,43 +204,40 @@
                                 <table class="table">
                                   <thead>
                                     <tr>
-                                      <th></th>
+                                      <th style="width: 30px;"></th>
                                       <th>标题</th>
                                       <th>物品类型</th>
                                       <th>物品名称</th>
                                       <th>发布时间</th>
                                       <th>预览图片</th>
                                       <th>状态修改</th>
+                                      <th>备注</th>
                                     </tr>
                                   </thead>
                                   <tbody id="tab_Find"></tbody>
                                 </table>
                             </div>
                             <div id="paging2">
-                                <div class="first">首页</div>
+                                <div class="first" onclick="mypublicFind(1);">首页</div>
                                 <div class="prev">上一页</div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>
                             <br>
-                            <div class="form-group" style="text-align: center;">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
-                                  <button class="btn btn-warning">取消</button>
-                                </div>
-                            </div>
+
                         </form>
                     </div>
                 	<div class="content">
+                        <br><br>
                         <form class="form-horizontal" role="form">
                         	<div class="form-group">
                                 <table class="table">
                                   <thead>
                                     <tr>
-                                      <th></th>
-                                      <th>时间</th>
+                                      <th style="width: 30px;"></th>
+                                      <th style="width: 160px;">时间</th>
                                       <th>系统消息</th>
-                                      <th>是否删除</th>
+                                      <th style="width: 160px;">是否删除</th>
                                     </tr>
                                   </thead>
                                   <tbody id="tab_inform"></tbody>
@@ -254,21 +246,10 @@
                             <div id="paging3">
                                 <div class="first">首页</div>
                                 <div class="prev">上一页</div>
-                                <ul class="list"></ul>
-                                <div class="go">
-                                  <input type="text" placeholder="Goto">
-                                  <button>跳转</button>
-                                </div>
                                 <div class="next">下一页</div>
                                 <div class="last">末页</div>
                             </div>
                             <br>
-                            <div class="form-group" style="text-align: center;">
-                                <div class="col-sm-offset-1 col-sm-10">
-                                  <button type="submit" class="btn btn-success" style="margin-right:50px;">提交</button>
-                                  <button class="btn btn-warning">取消</button>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </article>
