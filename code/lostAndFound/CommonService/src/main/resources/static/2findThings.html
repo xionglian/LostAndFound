@@ -29,7 +29,7 @@
         </div>
 
         <div class="fr userInfo">
-            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a>用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
         </div>
 </header>
@@ -43,7 +43,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="请输入您要查找的物品名称">
                 <span class="input-group-btn">
-                    <button class="btn btn-info" type="button">搜索</button>
+                    <button class="btn btn-info" onclick="findThingSearch01();">搜索</button>
                 </span>
             </div>
         </div>
@@ -78,9 +78,10 @@
                               <option>白云校区</option>
                               <option>西校区</option>
                             </select>
-                            <button class="btn btn-primary" style="top: -2px;">搜索</button>
                         </form>
-                        <button class="btn btn-warning" style="position: relative; left: 220px; top: -34px;" onClick="location.href='4public_findThing.html'">发布寻物启事</button>
+                        <button class="btn btn-primary" style="top: 0px; left: -2px;" onclick="findThingSearch02();">搜索</button>
+
+                        <button class="btn btn-warning" onClick="location.href='4public_findThing.html'">发布寻物启事</button>
                     </div>
                     <ol class="breadcrumb fr">
                         <li>您现在的位置：</li>

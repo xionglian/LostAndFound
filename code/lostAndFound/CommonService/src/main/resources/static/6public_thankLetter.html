@@ -29,7 +29,7 @@
         </div>
 
         <div class="fr userInfo">
-            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a>用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
         </div>
     </div>
@@ -167,6 +167,11 @@ function publicThank(){
     $.ajax({
         type:'post',
         url:'http://119.29.102.236/thanks/add',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        async:true,
         data:JSON.stringify({
             "title":title,
             "publisher":userName,
@@ -174,7 +179,7 @@ function publicThank(){
         }),
         dataType:'json',
         contentType:'application/json; charset=utf-8',
-        /*beforeSend:function(){
+        beforeSend:function(){
             if(!$title){
                 alert('发布信息的标题不能为空，请输入标题');
                 return false;
@@ -183,11 +188,11 @@ function publicThank(){
                 alert('内容不能为空，请填写信息');
                 return false;
             }
-        },*/
+        },
         success:function(data){
             var res = data.result;
             var id = data.data;
-            alert(JSON.stringify(data));
+            //alert(JSON.stringify(data));
             if(res === "success"){
                 alert('发布感谢信成功！');
                 location.href = '5thanksLetter.html';

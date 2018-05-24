@@ -29,7 +29,7 @@
         </div>
 
         <div class="fr userInfo">
-            <a href="8userManage.html">用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a>用户：<span id="userName">海绵宝宝依赖您的微笑</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-info btn-sm" onclick="exit();">退出</button>
         </div>
 
@@ -42,12 +42,12 @@
         	<img src="image/schoolLogo.png" class="img-responsive" alt="">
         </h1>
         <div class="search fr">
-            <div class="input-group">
+            <!--<div class="input-group">
                 <input type="text" class="form-control" placeholder="请输入您要查找的物品名称">
                 <span class="input-group-btn">
                     <button class="btn btn-info" type="button">搜索</button>
                 </span>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
@@ -80,7 +80,7 @@
                 </h4>
             </div>
             <div class="list-group-item animated fadeInUp">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="uploadForm">
                     <div class="form-group">
                         <label for="title" class="col-sm-2 control-label"><span class="start">*</span>标题</label>
                         <div class="col-sm-6">
@@ -179,7 +179,7 @@
                     <div class="form-group">
                         <label for="inputfile" class="col-sm-2 control-label"><span class="start">*</span>物品照片</label>
                         <div class="col-sm-6">
-                            <input type="file" id="inputfile">
+                            <input type="file" id="inputfile" name="uploadFile">
                         </div>
                      </div> 
                 </form>
@@ -246,99 +246,6 @@ $(document).ready(function(e) {
 		format: "yyyy-MM-dd  星期W"
 	})
 });
-function publicFindOwner(){
-    var $title = $('#title').val();
-    var $thingType = $('#thingsType').val();
-    var $thingName = $('#thingName').val();
-    var $keyWord01 = $('#keyWord01').val();
-    var $keyWord02 = $('#keyWord02').val();
-    var $keyWord03 = $('#keyWord03').val();
-    var $location = $('#location').val();
-    var $locationDtail = $('#location_detail').val();
-    var $pickUpOne = $('#erjixueyuan').val()+$('#class').val()+$('#name').val();
-    var $pickUpTime = $('#pickUpDate').val();
-    var $contactOne = $('#contactOne').val();
-    var $contactWay = $('#contactWay').val();
-    var $thingImg = $('#inputfile');
-    var $detail = $('#detail').val();
-
-    $.ajax({
-        type:'post',
-        url:'http://119.29.102.236/found/add',
-        data:JSON.stringify({
-            "title":$title,
-            "goodType":$thingType,
-            "goodName":$thingName,
-            "keyWord01":$keyWord01,
-            "keyWord02":$keyWord02,
-            "keyWord03":$keyWord03,
-            "foundAddress":$location,
-            "foundAddressDetail":$locationDtail,
-            "findPerson":$pickUpOne,
-            "foundTime":$pickUpTime,
-            "link_name":$contactOne,
-            "linkPhone":$contactWay,
-            "descriptionDetail":$detail,
-            "thingImg":$thingImg
-        }),
-        dataType:'json',
-        contentType:'application/json; charset=utf-8',
-        /*beforeSend:function(){
-            if(!$title){
-                alert('发布信息的标题不能为空，请输入标题');
-                return false;
-            }
-            if(!$thingName){
-                alert('请填写完物品类型');
-                return false;
-            }
-            if(!$locationDtail){
-                alert('请填写拾取到失物时的地点');
-                return false;
-            }
-            if(!$pickUpOne){
-                alert('拾取人信息不能为空，请填写完拾取人的信息');
-                return false;
-            }
-            if(!$pickUpTime){
-                alert('拾取失物的时间不能为空，请填写“拾取时间”。');
-                return false;
-            }
-            if(!$contactOne||!$contactWay){
-                alert('联系人的相关信息不能为空，请填写联系人的信息');
-                return false;
-            }
-            //     手机号为11位，以1开头，第二位为3,5,7,8，后9位都是数字
-            if(!/^1[3,5,7,8]\d{9}$/.test($contactWay)){
-                alert('请输入正确的手机号');
-                return false;
-            }
-            //服务协议是否打钩
-            if(!$detail){
-                alert('物品的具体描述不能为空，请填写失物的相关信息');
-                return false;
-            }
-        },*/
-        success:function(data){
-            //alert(JSON.stringify(data.result));
-            var res = data.result;
-            var id = data.data;
-/*
-            alert(res);
-            alert(id);
-*/
-            if(res === "success"){
-                alert('发布失物招领信息成功，失物招领的id值为：'+id);
-                location.href = '02denglu.html';
-            }else if(res === "fail"){
-                alert(id);
-            }
-        },
-        error:function(){
-            alert(data.data);
-        }
-    })
-}
 </script>
 </body>
 </html>

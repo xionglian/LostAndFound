@@ -75,7 +75,7 @@
                 </h4>
             </div>
             <div class="list-group-item">
-                <form class="form-horizontal" role="form" method="post">
+                <form id="uploadForm" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="loginname" class="col-sm-1 control-label">登录名</label>
                         <div class="col-sm-10">
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <label for="userImg" class="col-sm-1 control-label">用户头像</label>
                         <div class="col-sm-10">
-                            <input type="file" id="userImg">
+                            <input type="file" id="userImg" name="uploadFile">
                         </div>
                     </div>
                     <div class="form-group">
@@ -114,7 +114,7 @@
                                     <input type="radio" name="role" id="normalUser" value="0" checked> 普通用户
                                 </label>
                                 <label for="manager">
-                                    <input type="radio" name="role" id="manager"  value="10" disabled> 管理员
+                                    <input type="radio" name="role" id="manager"  value="1" disabled="false"> 管理员
                                 </label>
                             </div>
                         </div>

@@ -15,15 +15,15 @@ function prevPage(){
     pageNumber = pageNumber-1;
     if(pageNumber<1){
         number = 1;
-        findOwnerDatas(pageNumber);
+        thinkLetterDatas(pageNumber);
     }else{
-        findOwnerDatas(pageNumber);
+        thinkLetterDatas(pageNumber);
     }
 }
 function nextPage(){
     pageNumber=pageNumber+1;
     //alert(pageNumber);
-    findOwnerDatas(pageNumber);
+    thinkLetterDatas(pageNumber);
 }
 function turnTo(p,pageNumber){
     //qext.LocalStorage.save(p);

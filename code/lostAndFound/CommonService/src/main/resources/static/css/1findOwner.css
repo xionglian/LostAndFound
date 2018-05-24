@@ -16,6 +16,7 @@
     position: absolute;
     left: 1.5rem;
     top: -0.07rem;
+	display: inline-flex;
 }
 .chooseAdress .form-group{	
 	display: inline-block;
@@ -23,7 +24,7 @@
 .btn-warning{	
 	margin-left: 0.3rem;
 	position: relative;
-	top: -2px;
+	top: 1px;
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{	
