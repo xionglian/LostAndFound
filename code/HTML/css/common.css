@@ -150,7 +150,7 @@ section{ position: relative;}
 	position: absolute;
 	z-index: -1;
 }
-.lostAndFound_log{ left: 0.1rem; top: 0rem;}
+.lostAndFound_log{ left: 0.1rem; top: 0rem; display: none;}
 .focusOnzilvhui{ right: 0.1rem; top: 0rem; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
 .lostAndFound_log img,.focusOnzilvhui img{	
 	width: 100%;
