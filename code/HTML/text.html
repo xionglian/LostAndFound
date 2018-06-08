@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<h1>时间戳转换格式</h1>
+<hr>
+<div>
+    <input type="file" id="userImg">
+    <br>
+    <textarea name="" id="show" cols="30" rows="10"></textarea>
+    <button>提交</button>
+</div>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/cookie.js"></script>
+<script>
+    function formatDateTime(inputTime) {
+        var date = new Date(inputTime);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+    };
+
+    $('h1').html(formatDateTime(1525235417000));
+
+    $('button').click(function(){
+        var imgURL = $('#userImg').val();
+        $('#show').val(imgURL);
+    });
+</script>
+</body>
+</html>
